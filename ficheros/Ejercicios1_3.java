@@ -42,8 +42,6 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 		
 	}
 
-
-
 	@Override
 	public void escribirFlotante(float numeroDecimal, String ruta) {
 		// TODO Auto-generated method stub
@@ -55,11 +53,4 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	
-	
-		
-		
-
-
 }

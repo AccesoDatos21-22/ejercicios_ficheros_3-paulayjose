@@ -9,7 +9,7 @@ import modelo.Pokemon;
 
 /**
  * 
- * @author Escribe_aqui_tu_nombre
+ * @author Jose Viñas
  * @date 
  * @version 
  * @license GPLv3

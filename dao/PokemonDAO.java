@@ -1,5 +1,9 @@
 package dao;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,8 +53,7 @@ public interface PokemonDAO {
 	 *	
 	 * @param ruta fichero de texto
 	 */
-	public void escribirPokemon(String ruta, String name, int life, int atack, int defense, int specialAttack, int specialdefense, int speed);
-	
+	public void escribirPokemon(String ruta, String name, String level, int life, int attack, int defense, int specialAttack, int specialDefense, int speed);
 	
 	/**
 	 * Imprime por pantalla el contenido del fichero csv con los pokemon de la forma:
