@@ -68,11 +68,11 @@ public class Main {
 		tres.escribirPokemon(f, nombre, nivel, vida, ataque, defensa, ataque_especial, defensa_especial, velocidad); */
 		
 		System.out.println();
-		System.out.println("EJERCICIO 3");
+		System.out.println("EJERCICIO 5");
 		System.out.println();
 		
 		try {
-			Path e3 = Paths.get("Ejercicio3.txt");
+			Path e3 = Paths.get("Ejercicio5.txt");
 			Files.createFile(e3);
 		}
 		catch (IOException e){
