@@ -1,9 +1,19 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Scanner;
+
 import dao.PokemonDAOImp;
+import ficheros.Ejercicios1_3;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
+	/*	System.out.println("EJERCICIO 1");
+		System.out.println();
 		String nombre = null;
 		int nivel = 0;
 		int vida = 0;
@@ -55,6 +65,22 @@ public class Main {
 		System.out.println(nombre+" "+nivel+" "+vida+" "+ataque+" "+defensa+" "+ataque_especial+" "+defensa_especial+" "+velocidad);
 			
 		PokemonDAOImp tres = new PokemonDAOImp(1);
-		tres.escribirPokemon(f, nombre, nivel, vida, ataque, defensa, ataque_especial, defensa_especial, velocidad);
-	}	
+		tres.escribirPokemon(f, nombre, nivel, vida, ataque, defensa, ataque_especial, defensa_especial, velocidad); */
+		
+		System.out.println();
+		System.out.println("EJERCICIO 3");
+		System.out.println();
+		
+		try {
+			Path e3 = Paths.get("Ejercicio3.txt");
+			Files.createFile(e3);
+		}
+		catch (IOException e){
+			System.err.println(e.getMessage());
+		}
+		Ejercicios1_3 t = new Ejercicios1_3();
+		Scanner sc = new Scanner(System.in); 
+		t.escribefrases(t.getFrases(sc), t.getNombre(sc));
+		sc.close();
+	}
 }
