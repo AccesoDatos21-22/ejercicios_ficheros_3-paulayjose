@@ -47,21 +47,14 @@ public class PokemonDAOImp implements AulaDAO {
 		options[1] = crear;
 		
 		try (BufferedWriter bw = Files.newBufferedWriter(archivo, charset, options)){
-
-			if (Files.notExists(archivo)) {
-				Files.createFile(archivo);
-				bw.write(linea);
-			}
-			else {
+			if (Files.exists(archivo)) {	
 				bw.append(linea);
 				bw.newLine();
 			}
 		}
-		catch (FileNotFoundException e) {
+		catch (Exception e) {
 			System.err.println(e.getMessage());
-		}
-		catch (IOException e) {
-			System.err.println(e.getMessage());
+			System.err.println("ERROR");
 		}
 	}
 	
