@@ -31,9 +31,11 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 		
 		int cant = 0;
 		String frase = null;
-		List<String> cadenas = new ArrayList<String>();
+		List<String> cadenas = null;
 		
 		try {
+			cadenas = new ArrayList<String>();
+			
 			System.out.println("¿Cuántas frases desea introducir?");
 			cant = Integer.parseInt(escaner.nextLine());
 		
