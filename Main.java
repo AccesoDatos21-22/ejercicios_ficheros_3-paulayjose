@@ -2,6 +2,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import dao.PokemonDAOImp;
@@ -28,7 +30,7 @@ public class Main {
 		uno.escribirPokemon(f, c.getNombre(), c.getNivel(), c.getVida(), c.getAtaque(), c.getDefensa(), c.getAtaque_especial(), c.getDefensa_especial(), c.getVelocidad());
 		*/
 		
-		System.out.println();
+	/*	System.out.println();
 		System.out.println("EJERCICIO 3");
 		System.out.println();
 		
@@ -48,6 +50,70 @@ public class Main {
 		}
 		catch (IOException e) {
 			System.err.println(e.getMessage());
-		} 		
+		} */
+		
+		/*
+		System.out.println();
+		System.out.println("EJERCICIO 5");
+		System.out.println();
+		
+		Ejercicios1_3 eje = new Ejercicios1_3();
+		
+		try {
+			Scanner sc = new Scanner(System.in);
+			Path fi = Paths.get("Ejercicio5.txt");
+			
+			if (Files.notExists(fi)) {
+				Files.createFile(fi);
+				System.out.println("Se ha creado el fichero Ejercicio5.txt");
+			}
+			
+			eje.escribefrases(eje.getFrases(sc), eje.getNombre(sc));
+			sc.close();
+		}
+		catch (IOException e) {
+			System.err.println(e.getMessage());
+		} */
+		
+	/*	System.out.println();
+		System.out.println("EJERCICIO 7");
+		System.out.println();
+		
+		System.out.println("¿Cuál de las cuatro soluciones anteriores piensas que es el más eficiente?");
+		System.out.println();
+		System.out.println("Pienso que la opción más eficiente es "); */
+		
+		System.out.println();
+		System.out.println("EJERCICIO 9");
+		System.out.println();
+		
+		Scanner sc = new Scanner(System.in);
+		String nombre = null;
+		Ejercicios1_3 ej = null;
+		int cant = 0;
+		float flo = 0.0f;
+		
+		try {
+			nombre = "Ejercicio9.txt";
+			ej = new Ejercicios1_3();
+			
+			System.out.println("¿Cuántos números en coma flotante desea añadir?");
+			cant = Integer.valueOf(sc.nextLine());
+			
+			for (int i=0; i<cant; i++) {
+				System.out.println("Introduzca el "+(i+1)+"º número:");
+				flo = Float.valueOf(sc.nextLine());
+				
+				ej.escribirFlotante(flo, nombre);
+			}
+		}
+		catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		finally {
+			sc.close();
+		} 
+		
+		
 	}
 }
