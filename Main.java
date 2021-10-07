@@ -12,6 +12,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
+		/*
 		System.out.println("EJERCICIO 1");
 		System.out.println();
 		
@@ -25,6 +26,28 @@ public class Main {
 		uno.escribirPokemon(f, b.getNombre(), b.getNivel(), b.getVida(), b.getAtaque(), b.getDefensa(), b.getAtaque_especial(), b.getDefensa_especial(), b.getVelocidad());
 		uno.escribirPokemon(f, s.getNombre(), s.getNivel(), s.getVida(), s.getAtaque(), s.getDefensa(), s.getAtaque_especial(), s.getDefensa_especial(), s.getVelocidad());
 		uno.escribirPokemon(f, c.getNombre(), c.getNivel(), c.getVida(), c.getAtaque(), c.getDefensa(), c.getAtaque_especial(), c.getDefensa_especial(), c.getVelocidad());
+		*/
 		
+		System.out.println();
+		System.out.println("EJERCICIO 3");
+		System.out.println();
+		
+		Ejercicios1_3 ejer = new Ejercicios1_3();
+		
+		try {
+			Scanner sc = new Scanner(System.in);
+			Path f = Paths.get("Ejercicio3.txt");
+			
+			if (Files.notExists(f)) {
+				Files.createFile(f);
+				System.out.println("Se ha creado el fichero Ejercicio3.txt");
+			}
+			
+			ejer.escribefrases(ejer.getFrases(sc), ejer.getNombre(sc));
+			sc.close();
+		}
+		catch (IOException e) {
+			System.err.println(e.getMessage());
+		} 		
 	}
 }
