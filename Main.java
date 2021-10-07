@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,6 +11,7 @@ import modelo.Pokemon;
 public class Main {
 
 	public static void main(String[] args) {
+		
 		
 		System.out.println("EJERCICIO 1");
 		System.out.println();
@@ -25,14 +27,5 @@ public class Main {
 		uno.escribirPokemon(f, s.getNombre(), s.getNivel(), s.getVida(), s.getAtaque(), s.getDefensa(), s.getAtaque_especial(), s.getDefensa_especial(), s.getVelocidad());
 		uno.escribirPokemon(f, c.getNombre(), c.getNivel(), c.getVida(), c.getAtaque(), c.getDefensa(), c.getAtaque_especial(), c.getDefensa_especial(), c.getVelocidad());
 		
-		/* System.out.println();
-		System.out.println("EJERCICIO 3");
-		System.out.println();
-		
-		Ejercicios1_3 ejer = new Ejercicios1_3();
-		
-		Scanner sc = new Scanner(System.in);
-		ejer.escribefrases(ejer.getFrases(sc), ejer.getNombre(sc));
-		sc.close(); */
 	}
 }

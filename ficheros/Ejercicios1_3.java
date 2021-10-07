@@ -59,6 +59,10 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 		try {
 			System.out.println("Escriba el nombre del fichero donde se almacenarán las frases:");
 			ruta = Paths.get(escaner.next()+".txt");
+			
+			if (Files.exists(ruta)) {
+				System.out.println("A continuación añadiremos las frase al fichero "+ruta.getFileName());
+			}
 		}
 		catch (Exception e){
 			System.err.println(e.getMessage());
@@ -69,8 +73,16 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 	@Override
 	public void escribefrases(List<String> cadenas, Path ruta) {
 	
-		try {
-			Files.write(ruta, cadenas);
+		String frase = null;
+		
+		try (BufferedWriter bw = Files.newBufferedWriter(ruta)){
+			
+			for (int i=0; i<cadenas.size(); i++) {
+				frase = cadenas.get(i);
+				bw.write(frase);
+				bw.newLine();
+			}
+			System.out.println("COMPLETADO. Las líneas se han añadido al archivo.");
 		}
 		catch (FileNotFoundException e) {
 			System.err.println(e.getMessage());
