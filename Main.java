@@ -83,7 +83,7 @@ public class Main {
 		System.out.println();
 		System.out.println("Pienso que la opción más eficiente es "); */
 		
-		System.out.println();
+	/*	System.out.println();
 		System.out.println("EJERCICIO 9");
 		System.out.println();
 		
@@ -112,8 +112,26 @@ public class Main {
 		}
 		finally {
 			sc.close();
-		} 
+		} */
 		
+		System.out.println();
+		System.out.println("EJERCICIO 11");
+		System.out.println();
 		
+		Ejercicios1_3 ejer = null;
+		String ruta = null;
+		List<Float> lista = null;
+		
+		try {
+			ejer = new Ejercicios1_3();
+			ruta = "Ejercicio9.txt";
+			lista = ejer.leerFlotante(ruta);
+			for (int i=0; i<lista.size(); i++) {
+				System.out.println(lista.get(i).toString());
+			}
+		}
+		catch (Exception e) {
+			System.err.println(e.getMessage());
+		}	
 	}
 }
