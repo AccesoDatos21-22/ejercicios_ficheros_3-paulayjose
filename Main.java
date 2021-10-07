@@ -12,11 +12,14 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		AulaDAOImp ej = new AulaDAOImp(1);
-
 		// Ejercicio 16
-
 		System.out.println("----------------- Ejercicio 16 -----------------");
+		
+		System.out.println("¿Cuántos alumnos entran en el aula?");
+		System.out.print("Número: ");
+		int tamano = Integer.parseInt(sc.nextLine());
+
+		AulaDAOImp ej = new AulaDAOImp(tamano);
 
 		// Añadir alumnos
 		System.out.println("\n¿Cuántos alumnos quiere añadir?");
@@ -38,6 +41,7 @@ public class Main {
 
 		ej.escribeAlumnos(path);
 
+		//Imprimir alumnos
 		System.out.println("\nDatos de los alumnos: \n");
 		ej.leeAlumnos(path);
 
