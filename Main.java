@@ -1,80 +1,30 @@
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Scanner;
 
-import dao.AulaDAOImp;
 import dao.PokemonDAOImp;
-import modelo.Alumno;
+import modelo.Pokemon;
 
 public class Main {
 
 	static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
+
+		System.out.println("EJERCICIO 1");
+		System.out.println();
 		
-		AulaDAOImp ej = new AulaDAOImp(1);
-		PokemonDAOImp ejPok = new PokemonDAOImp(3);
+		String f = "Pokemones.csv";
 		
+		/*Pokemon b = new Pokemon("Bulbasaur", 3, 10, 34, 41, 45, 55, 24);
+		Pokemon s = new Pokemon("Squirtle", 4, 13, 39, 36, 49, 51, 28);
+		Pokemon c = new Pokemon("Charmander", 5, 16, 41, 35, 55, 47, 35);*/
 		
-		//Ejercicio 2
-		String ruta = "Pokemon.txt";
-
-
-		// Ejercicio 16
-
-		System.out.println("----------------- Ejercicio 16 -----------------");
-
-		// Añadir alumnos
-
-		System.out.println("\n¿Cuántos alumnos quiere añadir?");
-		int cantidad = Integer.parseInt(sc.nextLine());
-
-		for (int i = 0; i < cantidad; i++) {
-
-			if (ej.estaVacio())
-				ej.add(crear());
-			else if (ej.estaLLeno()) {
-				System.err.println("\nNo entran más alumnos en el aula");
-				break;
-			} else
-				ej.add(crear());
-		}
-
-		// Escribir en el fichero
-		Path path = Paths.get("Alumnos_del_aula.txt");
-
-		ej.escribeAlumnos(path);
-
-		System.out.println("\nDatos de los alumnos: \n");
-		ej.leeAlumnos(path);
-
-	}
-
-	public static Alumno crear() {
-
-		System.out.println("\nVa a introducir los datos del alumno: ");
-
-		System.out.print("Nombre: ");
-		String nombre = sc.nextLine();
-
-		System.out.print("Apellidos: ");
-		String apellidos = sc.nextLine();
-
-		System.out.print("Año de nacimiento: ");
-		int anio = sc.nextInt();
-		sc.nextLine();
-
-		System.out.print("Calle: ");
-		String calle = sc.nextLine();
-
-		System.out.print("Número: ");
-		int numero = sc.nextInt();
-		sc.nextLine();
-
-		Alumno alum = new Alumno(nombre, apellidos, anio, calle, numero);
-
-		return alum;
-
+		PokemonDAOImp uno = new PokemonDAOImp(3);
+		/*uno.escribirPokemon(f, b.getNombre(), b.getNivel(), b.getVida(), b.getAtaque(), b.getDefensa(), b.getAtaque_especial(), b.getDefensa_especial(), b.getVelocidad());
+		uno.escribirPokemon(f, s.getNombre(), s.getNivel(), s.getVida(), s.getAtaque(), s.getDefensa(), s.getAtaque_especial(), s.getDefensa_especial(), s.getVelocidad());
+		uno.escribirPokemon(f, c.getNombre(), c.getNivel(), c.getVida(), c.getAtaque(), c.getDefensa(), c.getAtaque_especial(), c.getDefensa_especial(), c.getVelocidad());
+		*/
+		
+		uno.imprimirPokemon(f);		
 	}
 
 }
