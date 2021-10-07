@@ -121,7 +121,7 @@ public class AulaDAOImp implements AulaDAO {
 		try (BufferedWriter bw = Files.newBufferedWriter(ruta)) {
 
 			for (Alumno al : alumnos) {
-				bw.write(al.getNombre() + "\t" + al.getApellidos() + "\t" + al.getAnoNacimiento() + "\t"
+				bw.write("Nombre: " + al.getNombre() + "\tAppellidos: " + al.getApellidos() + "\tAño de nacimiento: " + al.getAnoNacimiento() + "\tDirección: "
 						+ al.getDireccion());
 				bw.newLine();
 			}
