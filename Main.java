@@ -13,19 +13,12 @@ public class Main {
 	public static void main(String[] args) {
 		
 		AulaDAOImp ej = new AulaDAOImp(1);
-		PokemonDAOImp ejPok = new PokemonDAOImp(3);
-		
-		
-		//Ejercicio 2
-		String ruta = "Pokemon.txt";
-
 
 		// Ejercicio 16
 
 		System.out.println("----------------- Ejercicio 16 -----------------");
 
 		// Añadir alumnos
-
 		System.out.println("\n¿Cuántos alumnos quiere añadir?");
 		int cantidad = Integer.parseInt(sc.nextLine());
 
