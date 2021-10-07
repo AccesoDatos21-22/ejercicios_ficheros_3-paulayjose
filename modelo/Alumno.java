@@ -31,6 +31,11 @@ public class Alumno {
 	 * @param grupo
 	 * @param horario
 	 */
+	
+	public Alumno() {
+		
+	}
+	
 	public Alumno(String nombre, String apellidos, int anoNacimiento,
 			String calle, int numero) {
 		this.nombre = nombre;

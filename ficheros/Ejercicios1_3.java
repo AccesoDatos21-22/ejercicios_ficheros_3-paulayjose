@@ -1,5 +1,9 @@
 package ficheros;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Scanner;
@@ -38,7 +42,20 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 
 	@Override
 	public void leerFrases(Path ruta) {
-		// TODO Auto-generated method stub
+	
+		try (BufferedReader br = Files.newBufferedReader(ruta)){
+			
+			String linea;
+			
+			while ((linea = br.readLine()) != null) {
+				br.readLine();
+			}
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("El fichero no ha sido encontrado");
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
 		
 	}
 

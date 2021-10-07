@@ -1,5 +1,8 @@
 package dao;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,5 +66,20 @@ public class PokemonDAOImp implements AulaDAO {
 	public void leeAlumnos(Path ruta) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public void imprimirPokemon (String ruta) {
+		
+		BufferedReader br = null;
+		
+		try {
+			
+			br = new BufferedReader(new FileReader(ruta));
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 }
