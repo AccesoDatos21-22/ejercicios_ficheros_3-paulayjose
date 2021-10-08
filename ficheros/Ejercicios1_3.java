@@ -1,10 +1,14 @@
 package ficheros;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,58 +17,87 @@ import interfaces.InterfazEjercicios1_3;
 /**
  * 
  * @author Escribe_aqui_tu_nombre
- * @date 
- * @version 
+ * @date
+ * @version
  * @license GPLv3
  *
  */
 public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 
-	
-	
 	@Override
 	public List<String> getFrases(Scanner escaner) {
-		
-		return null;
+
+		int cant = 0;
+		String frase = null;
+		List<String> cadenas = null;
+
+		try {
+			cadenas = new ArrayList<String>();
+
+			System.out.println("¿Cuántas frases desea introducir?");
+			cant = Integer.parseInt(escaner.nextLine());
+
+			for (int i = 0; i < cant; i++) {
+				System.out.println("Introduzca la frase nº" + (i + 1) + ":");
+				frase = escaner.nextLine();
+				cadenas.add(frase);
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return cadenas;
+
 	}
 
 	@Override
 	public Path getNombre(Scanner escaner) {
-		
-		return null;
+
+		Path ruta = null;
+
+		try {
+			System.out.println("Escriba el nombre del fichero donde se almacenarán las frases:");
+			ruta = Paths.get(escaner.next() + ".txt");
+
+			if (Files.exists(ruta)) {
+				System.out.println("A continuación añadiremos las frases al fichero " + ruta.getFileName());
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return ruta;
 	}
-	
+
 	@Override
 	public void escribefrases(List<String> cadenas, Path ruta) {
-		
-		
+
+		String frase = null;
+
+		try (OutputStream os = Files.newOutputStream(ruta)) {
+
+			for (int i = 0; i < cadenas.size(); i++) {
+
+				frase = cadenas.get(i) + "\n";
+				os.write(frase.getBytes());
+
+			}
+
+		} catch (FileNotFoundException e) {
+			System.err.println(e.getMessage());
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+		}
+
 	}
 
 	@Override
 	public void leerFrases(Path ruta) {
-	
-		try (BufferedReader br = Files.newBufferedReader(ruta)){
-			
-			String linea;
-			
-			while ((linea = br.readLine()) != null) {
-				br.readLine();
-			}
-			
-		} catch (FileNotFoundException e) {
-			System.out.println("El fichero no ha sido encontrado");
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
-		
+
 	}
-
-
 
 	@Override
 	public void escribirFlotante(float numeroDecimal, String ruta) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -72,11 +105,5 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	
-	
-		
-		
-
 
 }
