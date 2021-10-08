@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -25,9 +26,6 @@ import interfaces.InterfazEjercicios1_3;
  *
  */
 public class Ejercicios1_3 implements InterfazEjercicios1_3 {
-
-	private static final OpenOption APPEND = null;
-	private static final OpenOption CREATE = null;
 
 	@Override
 	public List<String> getFrases(Scanner escaner) {
@@ -75,25 +73,53 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 	@Override
 	public void escribefrases(List<String> cadenas, Path ruta) {
 
-		String frase = null;
+		//Ejercicio6
+		Charset charset = Charset.forName("UTF-8");
+		
+		OpenOption append = StandardOpenOption.APPEND;
+		OpenOption create = StandardOpenOption.CREATE;
+		
+		OpenOption[] options = new OpenOption[2];
+		
+		options[0] = append;
+		options[1] = create;
 
-		try (OutputStream os = Files.newOutputStream(ruta)) {
-			
+		
+		String frase;
+		
+		try (BufferedWriter bw = Files.newBufferedWriter(ruta, charset, options)) {
+
 			for (int i = 0; i < cadenas.size(); i++) {
 				
-				frase = cadenas.get(i) + "\n";
-				os.write(frase.getBytes());
+				frase = cadenas.get(i);
+				
+				bw.append(cadenas.get(i));
+				bw.newLine();
 				
 			}
 
-			/*for (int i = 0; i < cadenas.size(); i++) {
-				frase = cadenas.get(i);
-				bw.write(frase);
-				bw.newLine();
-			}
-			
-			System.out.println("COMPLETADO. Las líneas se han añadido al archivo.");*/
-			
+			// Ejercicio 4
+			/*
+			 * String frase = null;
+			 * 
+			 * try (OutputStream os = Files.newOutputStream(ruta)) {
+			 * 
+			 * for (int i = 0; i < cadenas.size(); i++) {
+			 * 
+			 * frase = cadenas.get(i) + "\n"; 
+			 * 
+			 * os.write(frase.getBytes());
+			 * }
+			 */
+
+			// Ejercicio 3
+			/*
+			 * for (int i = 0; i < cadenas.size(); i++) { frase = cadenas.get(i);
+			 * bw.write(frase); bw.newLine(); }
+			 * 
+			 * System.out.println("COMPLETADO. Las líneas se han añadido al archivo.");
+			 */
+
 		} catch (FileNotFoundException e) {
 			System.err.println(e.getMessage());
 		} catch (IOException e) {
@@ -104,20 +130,19 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 
 	@Override
 	public void leerFrases(Path ruta) {
-		
-		//Ejercicio 8
-		
+
+		// Ejercicio 8
+
 		String linea;
-				
-		try(BufferedReader br = Files.newBufferedReader(ruta) ) {
-			
+
+		try (BufferedReader br = Files.newBufferedReader(ruta)) {
+
 			while ((linea = br.readLine()) != null) {
-				
+
 				System.out.println(linea);
-				
-			}			
-			
-			
+
+			}
+
 		} catch (FileNotFoundException e) {
 			System.err.println("El fichero no ha sido encontrado");
 		} catch (IOException e) {
