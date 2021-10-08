@@ -32,6 +32,11 @@ public class Main {
 
 			ejer.escribefrases(ejer.getFrases(sc), ejer.getNombre(sc));
 			
+			//Ejercicio 8
+			System.out.println("\n------------------ Ejercicio 8 ------------------");
+			System.out.println("\nFrases del fichero\n");
+			ejer.leerFrases(f);
+			
 			sc.close();
 			
 		} catch (IOException e) {

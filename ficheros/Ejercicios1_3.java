@@ -5,7 +5,9 @@ import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -23,6 +25,9 @@ import interfaces.InterfazEjercicios1_3;
  *
  */
 public class Ejercicios1_3 implements InterfazEjercicios1_3 {
+
+	private static final OpenOption APPEND = null;
+	private static final OpenOption CREATE = null;
 
 	@Override
 	public List<String> getFrases(Scanner escaner) {
@@ -59,7 +64,7 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 			ruta = Paths.get(escaner.next() + ".txt");
 
 			if (Files.exists(ruta)) {
-				System.out.println("A continuación añadiremos las frases al fichero " + ruta.getFileName());
+				System.out.println("A continuación añadiremos las frase al fichero " + ruta.getFileName());
 			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -73,14 +78,22 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 		String frase = null;
 
 		try (OutputStream os = Files.newOutputStream(ruta)) {
-
+			
 			for (int i = 0; i < cadenas.size(); i++) {
-
+				
 				frase = cadenas.get(i) + "\n";
 				os.write(frase.getBytes());
-
+				
 			}
 
+			/*for (int i = 0; i < cadenas.size(); i++) {
+				frase = cadenas.get(i);
+				bw.write(frase);
+				bw.newLine();
+			}
+			
+			System.out.println("COMPLETADO. Las líneas se han añadido al archivo.");*/
+			
 		} catch (FileNotFoundException e) {
 			System.err.println(e.getMessage());
 		} catch (IOException e) {
@@ -91,6 +104,25 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 
 	@Override
 	public void leerFrases(Path ruta) {
+		
+		//Ejercicio 8
+		
+		String linea;
+				
+		try(BufferedReader br = Files.newBufferedReader(ruta) ) {
+			
+			while ((linea = br.readLine()) != null) {
+				
+				System.out.println(linea);
+				
+			}			
+			
+			
+		} catch (FileNotFoundException e) {
+			System.err.println("El fichero no ha sido encontrado");
+		} catch (IOException e) {
+			System.err.println();
+		}
 
 	}
 
