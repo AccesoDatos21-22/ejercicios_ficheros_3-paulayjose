@@ -52,7 +52,6 @@ public class Main {
 			System.err.println(e.getMessage());
 		} */
 		
-		/*
 		System.out.println();
 		System.out.println("EJERCICIO 5");
 		System.out.println();
@@ -73,85 +72,7 @@ public class Main {
 		}
 		catch (IOException e) {
 			System.err.println(e.getMessage());
-		} */
-		
-	/*	System.out.println();
-		System.out.println("EJERCICIO 7");
-		System.out.println();
-		
-		System.out.println("¿Cuál de las cuatro soluciones anteriores piensas que es el más eficiente?");
-		System.out.println();
-		System.out.println("Pienso que la opción más eficiente es "); */
-		
-	/*	System.out.println();
-		System.out.println("EJERCICIO 9");
-		System.out.println();
-		
-		Scanner sc = new Scanner(System.in);
-		String nombre = null;
-		Ejercicios1_3 ej = null;
-		int cant = 0;
-		float flo = 0.0f;
-		
-		try {
-			nombre = "Ejercicio9.txt";
-			ej = new Ejercicios1_3();
-			
-			System.out.println("¿Cuántos números en coma flotante desea añadir?");
-			cant = Integer.valueOf(sc.nextLine());
-			
-			for (int i=0; i<cant; i++) {
-				System.out.println("Introduzca el "+(i+1)+"º número:");
-				flo = Float.valueOf(sc.nextLine());
-				
-				ej.escribirFlotante(flo, nombre);
-			}
 		}
-		catch (Exception e) {
-			System.err.println(e.getMessage());
-		}
-		finally {
-			sc.close();
-		} */
 		
-	/*	System.out.println();
-		System.out.println("EJERCICIO 11");
-		System.out.println();
-		
-		Ejercicios1_3 ejer = null;
-		String ruta = null;
-		List<Float> lista = null;
-		
-		try {
-			ejer = new Ejercicios1_3();
-			ruta = "Ejercicio9.txt";
-			lista = ejer.leerFlotante(ruta);
-			for (int i=0; i<lista.size(); i++) {
-				System.out.println(lista.get(i).toString());
-			}
-		}
-		catch (Exception e) {
-			System.err.println(e.getMessage());
-		} */
-		
-		System.out.println();
-		System.out.println("EJERCICIO 13");
-		System.out.println();
-		
-		PokemonDAOImp trece = null;
-		String nom = null;
-		Pokemon b = new Pokemon("Bulbasaur", 3, 14, 26, 29, 35, 32, 27);
-		Pokemon s = new Pokemon("Squirtle", 4, 17, 27, 30, 37, 33, 29);
-		
-		try {
-			trece = new PokemonDAOImp(2);
-			nom = "Pokemones.txt";
-			trece.escribirPokemon(nom, b);
-			trece.escribirPokemon(nom, s);
-			trece.escribirPokemon(nom, b); //Añadimos otra vez el Pokemon b para ver como salta un error de duplicidad y no lo añade.
-		}
-		catch (Exception e) {
-			System.err.println(e.getMessage());
-		}
 	}
 }
