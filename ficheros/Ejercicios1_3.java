@@ -73,29 +73,28 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 	@Override
 	public void escribefrases(List<String> cadenas, Path ruta) {
 
-		//Ejercicio6
+		// Ejercicio6
 		Charset charset = Charset.forName("UTF-8");
-		
+
 		OpenOption append = StandardOpenOption.APPEND;
 		OpenOption create = StandardOpenOption.CREATE;
-		
+
 		OpenOption[] options = new OpenOption[2];
-		
+
 		options[0] = append;
 		options[1] = create;
 
-		
 		String frase;
-		
+
 		try (BufferedWriter bw = Files.newBufferedWriter(ruta, charset, options)) {
 
 			for (int i = 0; i < cadenas.size(); i++) {
-				
+
 				frase = cadenas.get(i);
-				
+
 				bw.append(cadenas.get(i));
 				bw.newLine();
-				
+
 			}
 
 			// Ejercicio 4
@@ -106,10 +105,9 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 			 * 
 			 * for (int i = 0; i < cadenas.size(); i++) {
 			 * 
-			 * frase = cadenas.get(i) + "\n"; 
+			 * frase = cadenas.get(i) + "\n";
 			 * 
-			 * os.write(frase.getBytes());
-			 * }
+			 * os.write(frase.getBytes()); }
 			 */
 
 			// Ejercicio 3

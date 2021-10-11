@@ -1,7 +1,11 @@
 package modelo;
 
-public class Pokemon {
+import java.io.Serializable;
 
+//Ejercicio 12 JaveBean
+public class Pokemon implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private String nombre;
 	private int nivel;
 	private int vida;
@@ -90,5 +94,16 @@ public class Pokemon {
 	public void setVelocidad(int velocidad) {
 		this.velocidad = velocidad;
 	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	@Override
+	public String toString() {
+		return "\nNombre: " + nombre + "\nNivel: " + nivel + "\nVida: " + vida + "\nAtaque: " + ataque + "\nDefensa: " + defensa; 
+	}
+	
+	
 
 }

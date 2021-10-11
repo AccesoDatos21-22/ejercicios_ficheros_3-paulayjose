@@ -4,8 +4,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+import dao.AulaDAOImp;
 import dao.PokemonDAOImp;
 import ficheros.Ejercicios1_3;
+import modelo.Alumno;
 import modelo.Pokemon;
 
 public class Main {
@@ -14,35 +16,8 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		System.out.println();
-		System.out.println("EJERCICIO 3");
-		System.out.println();
-
-		Ejercicios1_3 ejer = new Ejercicios1_3();
-
-		try {
-			
-			Scanner sc = new Scanner(System.in);
-			Path f = Paths.get("Ejercicio3.txt");
-
-			if (Files.notExists(f)) {
-				Files.createFile(f);
-				System.out.println("Se ha creado el fichero Ejercicio3.txt");
-			}
-
-			ejer.escribefrases(ejer.getFrases(sc), ejer.getNombre(sc));
-			
-			//Ejercicio 8
-			System.out.println("\n------------------ Ejercicio 8 ------------------");
-			System.out.println("\nFrases del fichero\n");
-			ejer.leerFrases(f);
-			
-			sc.close();
-			
-		} catch (IOException e) {
-			System.err.println(e.getMessage());
-		}
+		
+		
 	}
 
 }
-

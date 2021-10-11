@@ -47,7 +47,11 @@ public class AulaDAOImp implements AulaDAO {
 	 */
 	public boolean estaVacio() {
 
-		return false;
+		if (alumnos.isEmpty())
+			return true;
+		else
+			return false;
+
 	}
 
 	/**
@@ -57,7 +61,10 @@ public class AulaDAOImp implements AulaDAO {
 	 */
 	public boolean estaLLeno() {
 
-		return false;
+		if (alumnos.size() == numalumnos + 1)
+			return true;
+		else
+			return false;
 	}
 
 	/**
@@ -66,6 +73,8 @@ public class AulaDAOImp implements AulaDAO {
 	 * @param valor a anadir al almacén
 	 */
 	public void add(Alumno alumno) {
+
+		alumnos.add(alumno);
 
 	}
 
@@ -85,6 +94,10 @@ public class AulaDAOImp implements AulaDAO {
 	 */
 	public void informacionAlumnos() {
 
+		for (Alumno al : alumnos) {
+			System.out.println(al.getNombre() + "\t" + al.getApellidos() + "\t" + al.getAnoNacimiento() + "\t"
+					+ al.getDireccion());
+		}
 	}
 
 	/**
@@ -93,6 +106,22 @@ public class AulaDAOImp implements AulaDAO {
 	 * @param ruta
 	 */
 	public void escribeAlumnos(Path ruta) {
+
+		try (BufferedWriter bw = Files.newBufferedWriter(ruta)) {
+
+			for (Alumno al : alumnos) {
+				bw.write("Nombre: " + al.getNombre() + "\tAppellidos: " + al.getApellidos() + "\tAño de nacimiento: "
+						+ al.getAnoNacimiento() + "\tDirección: " + al.getDireccion());
+				bw.newLine();
+			}
+
+		} catch (FileNotFoundException e) {
+			System.err.println("El fichero no ha sido encontrado");
+
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+
+		}
 
 	}
 
@@ -103,6 +132,22 @@ public class AulaDAOImp implements AulaDAO {
 	 */
 
 	public void leeAlumnos(Path ruta) {
+
+		try (BufferedReader br = Files.newBufferedReader(ruta)) {
+
+			String linea;
+
+			while ((linea = br.readLine()) != null) {
+				System.out.println(linea);
+			}
+
+		} catch (FileNotFoundException e) {
+			System.out.println("El fichero no se encuentra");
+
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+
+		}
 
 	}
 
