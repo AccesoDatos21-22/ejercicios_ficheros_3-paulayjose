@@ -149,7 +149,7 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 		catch (IOException e) {
 			System.err.println(e.getMessage());
 		}
-		catch (Exception e) { //No entiendo el porqué me salta esta excepción, pero la finalidad del ejercicio lo hace bien.
+		catch (Exception e) { //No entiendo el porqué me salta esta excepción, pero el código funciona correctamente.
 			System.err.println(e.getMessage());
 		}
 		return lista;

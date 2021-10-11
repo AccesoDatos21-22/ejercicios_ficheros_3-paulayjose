@@ -114,7 +114,7 @@ public class Main {
 			sc.close();
 		} */
 		
-		System.out.println();
+	/*	System.out.println();
 		System.out.println("EJERCICIO 11");
 		System.out.println();
 		
@@ -132,6 +132,26 @@ public class Main {
 		}
 		catch (Exception e) {
 			System.err.println(e.getMessage());
-		}	
+		} */
+		
+		System.out.println();
+		System.out.println("EJERCICIO 13");
+		System.out.println();
+		
+		PokemonDAOImp trece = null;
+		String nom = null;
+		Pokemon b = new Pokemon("Bulbasaur", 3, 14, 26, 29, 35, 32, 27);
+		Pokemon s = new Pokemon("Squirtle", 4, 17, 27, 30, 37, 33, 29);
+		
+		try {
+			trece = new PokemonDAOImp(2);
+			nom = "Pokemones.txt";
+			trece.escribirPokemon(nom, b);
+			trece.escribirPokemon(nom, s);
+			trece.escribirPokemon(nom, b); //Añadimos otra vez el Pokemon b para ver como salta un error de duplicidad y no lo añade.
+		}
+		catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
 	}
 }

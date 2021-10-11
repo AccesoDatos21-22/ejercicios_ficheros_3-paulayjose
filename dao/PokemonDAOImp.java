@@ -1,5 +1,6 @@
 package dao;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -55,6 +56,58 @@ public class PokemonDAOImp implements AulaDAO {
 		catch (Exception e) {
 			System.err.println(e.getMessage());
 			System.err.println("ERROR");
+		}
+	}
+	
+	public void escribirPokemon(String ruta, Pokemon pokemon) {
+		
+		Path fichero = Paths.get(ruta);
+		OpenOption[] options = new OpenOption[2];
+		options[0] = StandardOpenOption.APPEND;
+		options[1] = StandardOpenOption.CREATE;
+		BufferedReader br = null;
+		String linea = null;
+		String [] poke = null;
+		boolean sino = false;
+		String datos = null;
+		
+		try (BufferedWriter bw = Files.newBufferedWriter(fichero, options)){
+			
+			br = Files.newBufferedReader(fichero);
+			datos = pokemon.getNombre()+";"+pokemon.getNivel()+";"+pokemon.getVida()+";"+pokemon.getAtaque()+";"+pokemon.getDefensa()+";"+pokemon.getAtaque_especial()+";"+pokemon.getDefensa_especial()+";"+pokemon.getVelocidad();
+		
+			if ((linea = br.readLine()) == null) {
+				bw.write(datos);
+				bw.newLine();
+				System.out.println("El Pokemon "+pokemon.getNombre()+" ha sido añadido.");
+			}
+			else {
+				while (linea != null) {
+					
+					poke = linea.split(";");
+					if (!(pokemon.getNombre().equalsIgnoreCase(poke[0].toString()))) {
+						sino = true;
+					}
+					else {
+						System.err.println("El Pokemon "+pokemon.getNombre()+" ya existe.");
+						sino = false;
+						break;
+					}
+					linea = br.readLine();
+				}
+			}
+			if (sino) {
+				bw.append(datos);
+				bw.newLine();
+				System.out.println("El Pokemon "+pokemon.getNombre()+" ha sido añadido.");
+			}
+		}
+		catch (IOException e) {
+			System.err.println(e.getMessage());
+			System.err.println("Error IOException");
+		}
+		catch (Exception e) {
+			System.err.println(e.getMessage());
 		}
 	}
 	
