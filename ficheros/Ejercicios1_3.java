@@ -58,7 +58,7 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 		Path ruta = null;
 		
 		try {
-			System.out.println("Escriba el nombre del fichero donde se almacenarán las frases:");
+			System.out.println("Escriba el nombre del fichero donde se almacenarán las frases (sin extensión):");
 			ruta = Paths.get(escaner.next()+".txt");
 			
 			if (Files.exists(ruta)) {

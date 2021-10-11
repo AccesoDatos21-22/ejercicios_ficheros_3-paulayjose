@@ -90,4 +90,8 @@ public class Pokemon {
 		this.velocidad = velocidad;
 	}
 	
+	public String toString() {
+		return this.nombre+"\nNivel: "+this.nivel+"\nVida: "+this.vida+"\nAtaque: "+this.ataque+"\nDefensa: "+this.defensa+"\nAtaque Especial: "+this.ataque_especial+"\nDefensa Especial: "+this.defensa_especial+"\nVelocidad: "+this.velocidad;
+	}
+	
 }
