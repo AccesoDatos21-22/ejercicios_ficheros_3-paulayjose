@@ -43,6 +43,7 @@ public class Main {
 		 * for (Pokemon pokemon : lista) { System.out.println(pokemon); }
 		 */
 
+		//Ejercicio 10
 		Scanner sc = new Scanner(System.in);
 
 		Ejercicios1_3 ej = new Ejercicios1_3();
