@@ -2,8 +2,15 @@ package ficheros;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -151,7 +158,48 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 
 	@Override
 	public void escribirFlotante(float numeroDecimal, String ruta) {
-		// TODO Auto-generated method stub
+
+		Path p = Paths.get(ruta);
+
+		Charset charset = Charset.forName("UTF-8");
+
+		OpenOption append = StandardOpenOption.APPEND;
+		OpenOption create = StandardOpenOption.CREATE;
+
+		OpenOption[] options = new OpenOption[2];
+
+		options[0] = append;
+		options[1] = create;
+
+		try (BufferedWriter bw = Files.newBufferedWriter(p, charset, options)) {
+
+			String num = String.valueOf(numeroDecimal);
+
+			bw.append(num);
+			bw.newLine();
+
+		} catch (FileNotFoundException e) {
+			System.out.println("El fichero no ha sido encontrado");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
+
+	// Ejercicio 10
+	public void imprimirFlotante(String ruta) {
+
+		Path p = Paths.get(ruta);
+		String linea;
+
+		try (BufferedReader br = Files.newBufferedReader(p)) {
+
+			while ((linea = br.readLine()) != null)
+				System.out.println(linea);
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 
 	}
 
