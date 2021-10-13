@@ -9,12 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import dao.AulaDAOImp;
 import dao.PokemonDAOImp;
 import ficheros.Ejercicios1_3;
+import modelo.Alumno;
 import modelo.Pokemon;
 
 public class Main {
 
+	static Scanner sc = new Scanner (System.in);
+	
 	public static void main(String[] args) {
 		
 		/*
@@ -157,7 +161,7 @@ public class Main {
 			System.err.println(e.getMessage());
 		} */
 		
-		System.out.println();
+	/*	System.out.println();
 		System.out.println("EJERCICIO 15");
 		System.out.println();
 		
@@ -181,18 +185,81 @@ public class Main {
 			bw.close();
 			
 			nom = "Pokemones.txt";
-			cad = "char";
+			cad = "charm";
 			
 			quince = new PokemonDAOImp(3);
 			lista = quince.leerPokemon(nom, cad);
 			
 			for (int i=0; i<lista.size(); i++) {
-				System.out.println(lista.get(i).getNombre());
+				System.out.println(lista.get(i).toString());
+				System.out.println();
 			}
 		}
 		catch (Exception e) {
 			System.err.println(e.getMessage());
-		}
+		} */
+		
+		System.out.println();
+		System.out.println("EJERCICIO 17");
+		System.out.println();
 				
+		System.out.println("¿Cuántos alumnos entran en el aula?");
+		System.out.print("Número: ");
+		int tamano = Integer.parseInt(sc.nextLine());
+
+		AulaDAOImp ej = new AulaDAOImp(tamano);
+
+		// Añadir alumnos
+		System.out.println("\n¿Cuántos alumnos quiere añadir?");
+		int cantidad = Integer.parseInt(sc.nextLine());
+
+		for (int i = 0; i < cantidad; i++) {
+
+			if (ej.estaVacio()) {
+				ej.add(crear());
+			}
+			else if (ej.estaLLeno()) {
+				System.err.println("\nNo entran más alumnos en el aula");
+				break;
+			} 
+			else {
+				ej.add(crear());
+			}
+		}
+
+		// Escribir en el fichero
+		Path path = Paths.get("Alumnos_del_aula.txt");
+
+		ej.escribeAlumnos(path);
+
+		//Imprimir alumnos
+		System.out.println("\nDatos de los alumnos: \n");
+		ej.leeAlumnos(path);
+
+	}
+
+	public static Alumno crear() {
+
+		System.out.println("\nVa a introducir los datos del alumno: ");
+
+		System.out.println("Nombre: ");
+		String nombre = sc.nextLine();
+
+		System.out.println("Apellidos: ");
+		String apellidos = sc.nextLine();
+
+		System.out.println("Año de nacimiento: ");
+		int anio = Integer.parseInt(sc.nextLine());
+
+		System.out.println("Calle: ");
+		String calle = sc.nextLine();
+
+		System.out.println("Número: ");
+		int numero = Integer.parseInt(sc.nextLine());
+
+		Alumno alum = new Alumno(nombre, apellidos, anio, calle, numero);
+		
+		return alum;
 	}
 }
+
