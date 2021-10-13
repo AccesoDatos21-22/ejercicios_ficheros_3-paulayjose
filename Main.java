@@ -17,7 +17,7 @@ public class Main {
 		
 		System.out.println("¿Cuántos alumnos entran en el aula?");
 		System.out.print("Número: ");
-		int tamano = Integer.parseInt(sc.nextLine());
+		int tamano = Integer.parseInt(sc.nextLine()) - 1;
 
 		AulaDAOImp ej = new AulaDAOImp(tamano);
 
