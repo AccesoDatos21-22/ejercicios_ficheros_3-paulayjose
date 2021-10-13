@@ -81,14 +81,15 @@ public class Main {
 			System.err.println(e.getMessage());
 		}*/
 		
-		
-	/*	System.out.println();
+		System.out.println();
 		System.out.println("EJERCICIO 7");
 		System.out.println();
 		
 		System.out.println("¿Cuál de las cuatro soluciones anteriores piensas que es el más eficiente?");
 		System.out.println();
-		System.out.println("Pienso que la opción más eficiente es "); */
+		System.out.println("Pienso que la opción más eficiente es el ejercicio 6(Usando BufferedWriter sin crear un arrayList con\n"
+				+ "cada frase, sino con APPEND), debido a que gracias al BufferedWriter no estaremos accediendo constantemente\n"
+				+ "al fichero y al no crear un arrayList consumiremos menos recursos en mi opinión."); 
 		
 	/*	System.out.println();
 		System.out.println("EJERCICIO 9");
@@ -199,7 +200,7 @@ public class Main {
 			System.err.println(e.getMessage());
 		} */
 		
-		System.out.println();
+	/*	System.out.println();
 		System.out.println("EJERCICIO 17");
 		System.out.println();
 				
@@ -235,9 +236,9 @@ public class Main {
 		//Imprimir alumnos
 		System.out.println("\nDatos de los alumnos: \n");
 		ej.leeAlumnos(path);
-
-	}
-
+	*/
+	} 
+/*
 	public static Alumno crear() {
 
 		System.out.println("\nVa a introducir los datos del alumno: ");
@@ -260,6 +261,6 @@ public class Main {
 		Alumno alum = new Alumno(nombre, apellidos, anio, calle, numero);
 		
 		return alum;
-	}
+	}*/
 }
 

@@ -133,9 +133,7 @@ public class AulaDAOImp implements AulaDAO{
 	public void leeAlumnos(Path ruta) {
 		
 		try (BufferedReader br = Files.newBufferedReader(ruta)) {
-
 			System.out.println(Files.readAllLines(ruta));
-			
 		}
 		catch (FileNotFoundException e) {
 			System.out.println("El fichero no se encuentra");
