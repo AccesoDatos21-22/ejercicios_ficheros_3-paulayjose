@@ -7,6 +7,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.OpenOption;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -25,25 +29,25 @@ import interfaces.InterfazEjercicios1_3;
  *
  */
 public class Ejercicios1_3 implements InterfazEjercicios1_3 {
-	
+
 	@Override
 	public List<String> getFrases(Scanner escaner) {
 		
 		int cant = 0;
 		String frase = null;
 		List<String> cadenas = null;
-		
+
 		try {
 			cadenas = new ArrayList<String>();
-			
+
 			System.out.println("¿Cuántas frases desea introducir?");
 			cant = Integer.parseInt(escaner.nextLine());
-		
+
 			for (int i=0; i<cant; i++) {
 				System.out.println("Introduzca la frase nº"+(i+1)+":");
 				frase = escaner.nextLine();
 				cadenas.add(frase);
-			}	
+			}
 		}
 		catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -55,11 +59,11 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 	public Path getNombre(Scanner escaner) {
 		
 		Path ruta = null;
-		
+
 		try {
 			System.out.println("Escriba el nombre del fichero donde se almacenarán las frases:");
 			ruta = Paths.get(escaner.next()+".txt");
-			
+
 			if (Files.exists(ruta)) {
 				System.out.println("A continuación añadiremos las frase al fichero "+ruta.getFileName());
 			}
@@ -72,11 +76,11 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 	
 	@Override
 	public void escribefrases(List<String> cadenas, Path ruta) {
-	
+
 		String frase = null;
 		
 		try (BufferedWriter bw = Files.newBufferedWriter(ruta)){
-			
+
 			for (int i=0; i<cadenas.size(); i++) {
 				frase = cadenas.get(i);
 				bw.write(frase);
@@ -94,7 +98,20 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 
 	@Override
 	public void leerFrases(Path ruta) {
-		// TODO Auto-generated method stub
+
+		try (BufferedReader br = Files.newBufferedReader(ruta)){
+
+			String linea;
+
+			while ((linea = br.readLine()) != null) {
+				br.readLine();
+			}
+
+		} catch (FileNotFoundException e) {
+			System.out.println("El fichero no ha sido encontrado");
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
 		
 	}
 
