@@ -90,6 +90,34 @@ public class PokemonDAOImp implements AulaDAO {
 		}
 	}
 
+	public List<Pokemon> leerPokemon(String ruta, String nombre) {
+		List<Pokemon> lista = new ArrayList<Pokemon>();
+		Path fichero = Paths.get(ruta);
+		String linea = null;
+		String[] poke = null;
+		Pokemon temp = null;
+
+		try (BufferedReader br = Files.newBufferedReader(fichero)){
+			linea = br.readLine();
+			while (linea != null) {
+				poke = linea.split(";");
+				if (poke[0].toString().toLowerCase().contains(nombre.toLowerCase())) {
+					temp = new Pokemon(poke[0].toString(), Integer.parseInt(poke[1]), Integer.parseInt(poke[2]), Integer.parseInt(poke[3]), Integer.parseInt(poke[4]), Integer.parseInt(poke[5]), Integer.parseInt(poke[6]), Integer.parseInt(poke[7]));
+					lista.add(temp);
+				}
+				linea = br.readLine();
+			}
+		}
+		catch (IOException e) {
+			System.err.println(e.getMessage());
+		}
+		catch (Exception e) {
+			System.err.println(e.getMessage());
+			System.out.println("ERROR");
+		}
+		return lista;
+	}
+
 	@Override
 	public boolean estaVacio() {
 		// TODO Auto-generated method stub
