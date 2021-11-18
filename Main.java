@@ -2,6 +2,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import dao.PokemonDAOImp;
@@ -9,8 +11,6 @@ import ficheros.Ejercicios1_3;
 import modelo.Pokemon;
 
 public class Main {
-
-	static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
 
@@ -28,13 +28,9 @@ public class Main {
 		uno.escribirPokemon(f, b.getNombre(), b.getNivel(), b.getVida(), b.getAtaque(), b.getDefensa(), b.getAtaque_especial(), b.getDefensa_especial(), b.getVelocidad());
 		uno.escribirPokemon(f, s.getNombre(), s.getNivel(), s.getVida(), s.getAtaque(), s.getDefensa(), s.getAtaque_especial(), s.getDefensa_especial(), s.getVelocidad());
 		uno.escribirPokemon(f, c.getNombre(), c.getNivel(), c.getVida(), c.getAtaque(), c.getDefensa(), c.getAtaque_especial(), c.getDefensa_especial(), c.getVelocidad());
-
-		System.out.println("EJERCICIO 2");
-		System.out.println();
-
-		uno.imprimirPokemon(f); */
-
-		System.out.println();
+		*/
+		
+	/*	System.out.println();
 		System.out.println("EJERCICIO 3");
 		System.out.println();
 
@@ -54,6 +50,30 @@ public class Main {
 		}
 		catch (IOException e) {
 			System.err.println(e.getMessage());
+		} */
+
+		System.out.println();
+		System.out.println("EJERCICIO 5");
+		System.out.println();
+
+		Ejercicios1_3 eje = new Ejercicios1_3();
+
+		try {
+			Scanner sc = new Scanner(System.in);
+			Path fi = Paths.get("Ejercicio5.txt");
+
+			if (Files.notExists(fi)) {
+				Files.createFile(fi);
+				System.out.println("Se ha creado el fichero Ejercicio5.txt");
+			}
+
+			eje.escribefrases(eje.getFrases(sc), eje.getNombre(sc));
+			sc.close();
+		}
+		catch (IOException e) {
+			System.err.println(e.getMessage());
 		}
 	}
+
 }
+

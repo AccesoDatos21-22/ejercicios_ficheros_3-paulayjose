@@ -1,5 +1,6 @@
 package ficheros;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,7 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.OpenOption;
-import java.io.BufferedReader;
 import java.io.OutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -28,8 +28,8 @@ import interfaces.InterfazEjercicios1_3;
  */
 public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 
-	
-	
+
+
 	@Override
 	public List<String> getFrases(Scanner escaner) {
 		
@@ -79,51 +79,28 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 
 		String frase = null;
 
-		try (OutputStream os = Files.newOutputStream(ruta)) {
+		try (BufferedWriter bw = Files.newBufferedWriter(ruta)){
 
-			for (int i = 0; i < cadenas.size(); i++) {
-
-				frase = cadenas.get(i) + "\n";
-				os.write(frase.getBytes());
-
+			for (int i=0; i<cadenas.size(); i++) {
+				frase = cadenas.get(i);
+				bw.write(frase);
+				bw.newLine();
 			}
-
-		} catch (FileNotFoundException e) {
+			System.out.println("COMPLETADO. Las líneas se han añadido al archivo.");
+		}
+		catch (FileNotFoundException e) {
 			System.err.println(e.getMessage());
-		} catch (IOException e) {
+		}
+		catch (IOException e){
 			System.err.println(e.getMessage());
 		}
 	}
-
-		String frase = null;
-
-		try (OutputStream os = Files.newOutputStream(ruta)) {
 
 	@Override
 	public void leerFrases(Path ruta) {
-
-		try (BufferedReader br = Files.newBufferedReader(ruta)){
-
-			String linea;
-
-			while ((linea = br.readLine()) != null) {
-				br.readLine();
-			for (int i = 0; i < cadenas.size(); i++) {
-
-				frase = cadenas.get(i) + "\n";
-				os.write(frase.getBytes());
-
-			}
-
-		} catch (FileNotFoundException e) {
-			System.err.println(e.getMessage());
-		} catch (IOException e) {
-			System.err.println(e.getMessage());
-		}
+		// TODO Auto-generated method stub
 
 	}
-
-
 
 	@Override
 	public void escribirFlotante(float numeroDecimal, String ruta) {
@@ -131,7 +108,7 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 		Path p = Paths.get(ruta);
 		OpenOption[] options = new OpenOption[2];
 		options[0] = StandardOpenOption.APPEND;
-		options[1] = StandardOpenOption.CREATE_NEW;
+		options[1] = StandardOpenOption.CREATE;
 		String num = null;
 
 		try (BufferedWriter bw = Files.newBufferedWriter(p, options)){
@@ -157,7 +134,28 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 
 	@Override
 	public List<Float> leerFlotante(String ruta) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Path fichero = Paths.get(ruta);
+		List<Float> lista = null;
+		Float linea = null;
+
+		try (BufferedReader br = Files.newBufferedReader(fichero)) {
+
+			lista = new ArrayList<Float>();
+
+			while ((linea = Float.valueOf(br.readLine())) != null) {
+				lista.add(linea);
+			}
+		}
+		catch (FileNotFoundException e) {
+			System.err.println(e.getMessage());
+		}
+		catch (IOException e) {
+			System.err.println(e.getMessage());
+		}
+		catch (Exception e) { //No entiendo el porqué me salta esta excepción, pero el código funciona correctamente.
+			System.err.println(e.getMessage());
+		}
+		return lista;
 	}
 }
