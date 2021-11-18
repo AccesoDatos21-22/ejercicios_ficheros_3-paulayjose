@@ -10,15 +10,17 @@ import modelo.Pokemon;
 
 public class Main {
 
+	static Scanner sc = new Scanner(System.in);
+
 	public static void main(String[] args) {
-		
+
 		/*
 		System.out.println("EJERCICIO 1");
 		System.out.println();
 
 		String f = "Pokemones.csv";
 
-		 Pokemon b = new Pokemon("Bulbasaur", 3, 10, 34, 41, 45, 55, 24);
+		Pokemon b = new Pokemon("Bulbasaur", 3, 10, 34, 41, 45, 55, 24);
 		Pokemon s = new Pokemon("Squirtle", 4, 13, 39, 36, 49, 51, 28);
 		Pokemon c = new Pokemon("Charmander", 5, 16, 41, 35, 55, 47, 35);
 

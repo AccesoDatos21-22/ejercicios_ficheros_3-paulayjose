@@ -8,9 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.OpenOption;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
+import java.io.OutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -30,6 +28,8 @@ import interfaces.InterfazEjercicios1_3;
  */
 public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 
+	
+	
 	@Override
 	public List<String> getFrases(Scanner escaner) {
 		
@@ -73,28 +73,31 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 		}
 		return ruta;
 	}
-	
+
 	@Override
 	public void escribefrases(List<String> cadenas, Path ruta) {
 
 		String frase = null;
-		
-		try (BufferedWriter bw = Files.newBufferedWriter(ruta)){
 
-			for (int i=0; i<cadenas.size(); i++) {
-				frase = cadenas.get(i);
-				bw.write(frase);
-				bw.newLine();
+		try (OutputStream os = Files.newOutputStream(ruta)) {
+
+			for (int i = 0; i < cadenas.size(); i++) {
+
+				frase = cadenas.get(i) + "\n";
+				os.write(frase.getBytes());
+
 			}
-			System.out.println("COMPLETADO. Las líneas se han añadido al archivo.");
-		}
-		catch (FileNotFoundException e) {
+
+		} catch (FileNotFoundException e) {
 			System.err.println(e.getMessage());
-		}
-		catch (IOException e){
+		} catch (IOException e) {
 			System.err.println(e.getMessage());
 		}
 	}
+
+		String frase = null;
+
+		try (OutputStream os = Files.newOutputStream(ruta)) {
 
 	@Override
 	public void leerFrases(Path ruta) {
@@ -105,29 +108,36 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 
 			while ((linea = br.readLine()) != null) {
 				br.readLine();
+			for (int i = 0; i < cadenas.size(); i++) {
+
+				frase = cadenas.get(i) + "\n";
+				os.write(frase.getBytes());
+
 			}
 
 		} catch (FileNotFoundException e) {
-			System.out.println("El fichero no ha sido encontrado");
+			System.err.println(e.getMessage());
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
-		
+
 	}
+
+
 
 	@Override
 	public void escribirFlotante(float numeroDecimal, String ruta) {
-		
+
 		Path p = Paths.get(ruta);
 		OpenOption[] options = new OpenOption[2];
 		options[0] = StandardOpenOption.APPEND;
 		options[1] = StandardOpenOption.CREATE_NEW;
 		String num = null;
-		
+
 		try (BufferedWriter bw = Files.newBufferedWriter(p, options)){
-			
+
 			num = String.valueOf(numeroDecimal);
-			
+
 			if (Files.exists(p)) {
 				bw.append(num);
 				bw.newLine();
@@ -141,7 +151,7 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 			}
 		}
 		catch (IOException e) {
-			
+
 		}
 	}
 
