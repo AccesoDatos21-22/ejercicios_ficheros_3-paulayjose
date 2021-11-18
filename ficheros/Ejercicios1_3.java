@@ -117,8 +117,32 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 
 	@Override
 	public void escribirFlotante(float numeroDecimal, String ruta) {
-		// TODO Auto-generated method stub
 		
+		Path p = Paths.get(ruta);
+		OpenOption[] options = new OpenOption[2];
+		options[0] = StandardOpenOption.APPEND;
+		options[1] = StandardOpenOption.CREATE_NEW;
+		String num = null;
+		
+		try (BufferedWriter bw = Files.newBufferedWriter(p, options)){
+			
+			num = String.valueOf(numeroDecimal);
+			
+			if (Files.exists(p)) {
+				bw.append(num);
+				bw.newLine();
+			}
+			else {
+				System.out.println("No existe el fichero de texto.");
+				Files.createFile(p);
+				System.out.println("El fichero de texto fue creado correctamente.");
+				bw.append(num);
+				bw.newLine();
+			}
+		}
+		catch (IOException e) {
+			
+		}
 	}
 
 	@Override
