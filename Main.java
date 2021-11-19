@@ -42,7 +42,7 @@ public class Main {
 		Ejercicios1_3 ejer = new Ejercicios1_3();
 
 		try {
-			
+
 			Scanner sc = new Scanner(System.in);
 			Path f = Paths.get("Ejercicio3.txt");
 
@@ -193,30 +193,31 @@ public class Main {
 			System.err.println(e.getMessage());
 		} */
 
-		/*
-		 * Ejercicio 14 System.out.println("EJERCICIO 1"); System.out.println();
-		 *
-		 * List<Pokemon> lista = new ArrayList<Pokemon>(); String f = "Pokemones.csv";
-		 *
-		 * Pokemon b = new Pokemon("Bulbasaur", 3, 10, 34, 41, 45, 55, 24); Pokemon s =
-		 * new Pokemon("Squirtle", 4, 13, 39, 36, 49, 51, 28); Pokemon c = new
-		 * Pokemon("Charmander", 5, 16, 41, 35, 55, 47, 35);
-		 *
-		 * PokemonDAOImp uno = new PokemonDAOImp(3); uno.escribirPokemon(f,
-		 * b.getNombre(), b.getNivel(), b.getVida(), b.getAtaque(), b.getDefensa(),
-		 * b.getAtaque_especial(), b.getDefensa_especial(), b.getVelocidad());
-		 * uno.escribirPokemon(f, s.getNombre(), s.getNivel(), s.getVida(),
-		 * s.getAtaque(), s.getDefensa(), s.getAtaque_especial(),
-		 * s.getDefensa_especial(), s.getVelocidad()); uno.escribirPokemon(f,
-		 * c.getNombre(), c.getNivel(), c.getVida(), c.getAtaque(), c.getDefensa(),
-		 * c.getAtaque_especial(), c.getDefensa_especial(), c.getVelocidad());
-		 *
-		 * uno.imprimirPokemon(f);
-		 *
-		 * lista = uno.leerPokemon(f);
-		 *
-		 * for (Pokemon pokemon : lista) { System.out.println(pokemon); }
-		 */
+		// Ejercicio 14
+		/*System.out.println("EJERCICIO 14");
+		System.out.println();
+
+		List<Pokemon> lista = new ArrayList<Pokemon>();
+		String f = "Pokemones.csv";
+
+		Pokemon b = new Pokemon("Bulbasaur", 3, 10, 34, 41, 45, 55, 24);
+		Pokemon s = new Pokemon("Squirtle", 4, 13, 39, 36, 49, 51, 28);
+		Pokemon c = new Pokemon("Charmander", 5, 16, 41, 35, 55, 47, 35);
+
+		PokemonDAOImp uno = new PokemonDAOImp(3);
+
+		uno.escribirPokemon(f, b.getNombre(), b.getNivel(), b.getVida(), b.getAtaque(), b.getDefensa(),
+				b.getAtaque_especial(), b.getDefensa_especial(), b.getVelocidad());
+		uno.escribirPokemon(f, s.getNombre(), s.getNivel(), s.getVida(), s.getAtaque(), s.getDefensa(),
+				s.getAtaque_especial(), s.getDefensa_especial(), s.getVelocidad());
+		uno.escribirPokemon(f, c.getNombre(), c.getNivel(), c.getVida(), c.getAtaque(), c.getDefensa(),
+				c.getAtaque_especial(), c.getDefensa_especial(), c.getVelocidad());
+
+		lista = uno.leerPokemon(f);
+
+		for (Pokemon pokemon : lista) {
+			System.out.println(pokemon);
+		}*/
 
 	/*	System.out.println();
 		System.out.println("EJERCICIO 15");
@@ -294,22 +295,37 @@ public class Main {
 		ej.leeAlumnos(path);
 	*/
 	}
-}
 /*
 	public static Alumno crear() {
 
 		Scanner sc = new Scanner(System.in);
 
+		Pokemon b = new Pokemon("Bulbasaur", 3, 10, 34, 41, 45, 55, 24);
+		Pokemon s = new Pokemon("Squirtle", 4, 13, 39, 36, 49, 51, 28);
+		Pokemon c = new Pokemon("Charmander", 5, 16, 41, 35, 55, 47, 35);
 		System.out.println("\nVa a introducir los datos del alumno: ");
 
+		PokemonDAOImp uno = new PokemonDAOImp(3);
+		uno.escribirPokemon(f, b.getNombre(), b.getNivel(), b.getVida(), b.getAtaque(), b.getDefensa(),
+				b.getAtaque_especial(), b.getDefensa_especial(), b.getVelocidad());
+		uno.escribirPokemon(f, s.getNombre(), s.getNivel(), s.getVida(), s.getAtaque(), s.getDefensa(),
+				s.getAtaque_especial(), s.getDefensa_especial(), s.getVelocidad());
+		uno.escribirPokemon(f, c.getNombre(), c.getNivel(), c.getVida(), c.getAtaque(), c.getDefensa(),
+				c.getAtaque_especial(), c.getDefensa_especial(), c.getVelocidad());
 		System.out.println("Nombre: ");
 		String nombre = sc.nextLine();
 
+		//uno.imprimirPokemon(f);
 		System.out.println("Apellidos: ");
 		String apellidos = sc.nextLine();
 
+		lista = uno.leerPokemon(f);
 		System.out.println("Año de nacimiento: ");
 		int anio = Integer.parseInt(sc.nextLine());
+
+		for (Pokemon pokemon : lista) {
+			System.out.println(pokemon);
+		}
 
 		System.out.println("Calle: ");
 		String calle = sc.nextLine();
@@ -323,5 +339,6 @@ public class Main {
 
 		return alum;
 	}*/
+}
 
 
