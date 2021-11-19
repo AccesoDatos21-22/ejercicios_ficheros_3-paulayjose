@@ -3,9 +3,15 @@ package ficheros;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -29,8 +35,6 @@ import interfaces.InterfazEjercicios1_3;
  */
 public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 
-
-
 	@Override
 	public List<String> getFrases(Scanner escaner) {
 
@@ -44,13 +48,12 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 			System.out.println("¿Cuántas frases desea introducir?");
 			cant = Integer.parseInt(escaner.nextLine());
 
-			for (int i=0; i<cant; i++) {
-				System.out.println("Introduzca la frase nº"+(i+1)+":");
+			for (int i = 0; i < cant; i++) {
+				System.out.println("Introduzca la frase nº" + (i + 1) + ":");
 				frase = escaner.nextLine();
 				cadenas.add(frase);
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 		return cadenas;
@@ -63,14 +66,13 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 		Path ruta = null;
 
 		try {
-			System.out.println("Escriba el nombre del fichero donde se almacenarán las frases (sin extensión):");
-			ruta = Paths.get(escaner.next()+".txt");
+			System.out.println("Escriba el nombre del fichero donde se almacenarán las frases:");
+			ruta = Paths.get(escaner.next() + ".txt");
 
 			if (Files.exists(ruta)) {
-				System.out.println("A continuación añadiremos las frase al fichero "+ruta.getFileName());
+				System.out.println("A continuación añadiremos las frase al fichero " + ruta.getFileName());
 			}
-		}
-		catch (Exception e){
+		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 		return ruta;
@@ -81,39 +83,39 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 
 		//Ejercicio6
 		Charset charset = Charset.forName("UTF-8");
-
+		
 		OpenOption append = StandardOpenOption.APPEND;
 		OpenOption create = StandardOpenOption.CREATE;
-
+		
 		OpenOption[] options = new OpenOption[2];
-
+		
 		options[0] = append;
 		options[1] = create;
 
 
 		String frase;
-
+		
 		try (BufferedWriter bw = Files.newBufferedWriter(ruta, charset, options)) {
 
 			for (int i = 0; i < cadenas.size(); i++) {
-
+				
 				frase = cadenas.get(i);
-
+				
 				bw.append(cadenas.get(i));
 				bw.newLine();
-
+				
 			}
 
 			// Ejercicio 4
 			/*
 			 * String frase = null;
-			 *
+			 * 
 			 * try (OutputStream os = Files.newOutputStream(ruta)) {
-			 *
+			 * 
 			 * for (int i = 0; i < cadenas.size(); i++) {
-			 *
-			 * frase = cadenas.get(i) + "\n";
-			 *
+			 * 
+			 * frase = cadenas.get(i) + "\n"; 
+			 * 
 			 * os.write(frase.getBytes());
 			 * }
 			 */
@@ -122,7 +124,7 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 			/*
 			 * for (int i = 0; i < cadenas.size(); i++) { frase = cadenas.get(i);
 			 * bw.write(frase); bw.newLine(); }
-			 *
+			 * 
 			 * System.out.println("COMPLETADO. Las líneas se han añadido al archivo.");
 			 */
 
@@ -151,7 +153,7 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 		} catch (FileNotFoundException e) {
 			System.err.println("El fichero no ha sido encontrado");
 		} catch (IOException e) {
-			System.err.println();
+			System.err.println(e.getMessage());
 		}
 
 	}
@@ -182,7 +184,23 @@ public class Ejercicios1_3 implements InterfazEjercicios1_3 {
 			}
 		}
 		catch (IOException e) {
+			System.err.println(e.getMessage());
+		}
+	}
 
+	// Ejercicio 10
+	public void imprimirFlotante(String ruta) {
+
+		Path p = Paths.get(ruta);
+		String linea;
+
+		try (BufferedReader br = Files.newBufferedReader(p)) {
+
+			while ((linea = br.readLine()) != null)
+				System.out.println(linea);
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 	}
 

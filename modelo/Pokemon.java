@@ -1,7 +1,11 @@
 package modelo;
 
-public class Pokemon {
-	
+import java.io.Serializable;
+
+//Ejercicio 12 JaveBean
+public class Pokemon implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private String nombre;
 	private int nivel;
 	private int vida;
@@ -10,11 +14,11 @@ public class Pokemon {
 	private int ataque_especial;
 	private int defensa_especial;
 	private int velocidad;
-	
+
 	public Pokemon () {
-		
+
 	}
-	
+
 	public Pokemon (String nombre, int nivel, int vida, int ataque, int defensa, int ataque_especial, int defensa_especial, int velocidad) {
 		this.nombre = nombre;
 		this.nivel = nivel;
@@ -89,9 +93,16 @@ public class Pokemon {
 	public void setVelocidad(int velocidad) {
 		this.velocidad = velocidad;
 	}
-	
-	public String toString() {
-		return this.nombre+"\nNivel: "+this.nivel+"\nVida: "+this.vida+"\nAtaque: "+this.ataque+"\nDefensa: "+this.defensa+"\nAtaque Especial: "+this.ataque_especial+"\nDefensa Especial: "+this.defensa_especial+"\nVelocidad: "+this.velocidad;
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "\nNombre: " + nombre + "\nNivel: " + nivel + "\nVida: " + vida + "\nAtaque: " + ataque + "\nDefensa: " + defensa;
+	}
+
+
+
 }

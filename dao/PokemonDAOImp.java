@@ -3,9 +3,11 @@ package dao;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.OpenOption;
@@ -90,32 +92,63 @@ public class PokemonDAOImp implements AulaDAO {
 		}
 	}
 
-	public List<Pokemon> leerPokemon(String ruta, String nombre) {
-		List<Pokemon> lista = new ArrayList<Pokemon>();
-		Path fichero = Paths.get(ruta);
-		String linea = null;
-		String[] poke = null;
-		Pokemon temp = null;
+	public void imprimirPokemon(String ruta) {
+		Path archivo = Paths.get(ruta);
+		String linea;
 
-		try (BufferedReader br = Files.newBufferedReader(fichero)){
-			linea = br.readLine();
-			while (linea != null) {
-				poke = linea.split(";");
-				if (poke[0].toString().toLowerCase().contains(nombre.toLowerCase())) {
-					temp = new Pokemon(poke[0].toString(), Integer.parseInt(poke[1]), Integer.parseInt(poke[2]), Integer.parseInt(poke[3]), Integer.parseInt(poke[4]), Integer.parseInt(poke[5]), Integer.parseInt(poke[6]), Integer.parseInt(poke[7]));
-					lista.add(temp);
-				}
-				linea = br.readLine();
+		try (BufferedReader br = Files.newBufferedReader(archivo)) {
+
+			while ((linea = br.readLine()) != null) {
+
+				String pokemones[] = linea.split(";");
+
+				System.out.println("\nName: <" + pokemones[0] + ">\n\tLevel: <" + pokemones[1] + ">\n\tHP: <"
+						+ pokemones[2] + ">\n\tAttack: <" + pokemones[3] + ">\n\tDefense: <" + pokemones[4]
+						+ ">\n\tSppecial attack: <" + pokemones[5] + ">\n\tSpecial defense: <" + pokemones[6]
+						+ ">\n\tSpeed: <" + pokemones[7] + ">");
+
 			}
-		}
-		catch (IOException e) {
+
+		} catch (FileNotFoundException e) {
+			System.err.println("El fichero no ha sido encontrado");
+		} catch (IOException e) {
 			System.err.println(e.getMessage());
 		}
-		catch (Exception e) {
-			System.err.println(e.getMessage());
-			System.out.println("ERROR");
+	}
+
+	public List<Pokemon> leerPokemon(String ruta) {
+
+		List<Pokemon> listaPokemones = new ArrayList<Pokemon>();
+		Path path = Paths.get(ruta);
+		String linea;
+
+		try(BufferedReader br = Files.newBufferedReader(path)) {
+
+			while ((linea = br.readLine()) != null) {
+
+				String[] pok = linea.split(";");
+
+				Pokemon pokem = new Pokemon();
+
+				pokem.setNombre(pok[0]);
+				pokem.setNivel(Integer.parseInt(pok[1]));
+				pokem.setVida(Integer.parseInt(pok[2]));
+				pokem.setAtaque(Integer.parseInt(pok[3]));
+				pokem.setDefensa(Integer.parseInt(pok[4]));
+				pokem.setAtaque_especial(Integer.parseInt(pok[5]));
+				pokem.setDefensa_especial(Integer.parseInt(pok[6]));
+				pokem.setVelocidad(Integer.parseInt(pok[7]));
+
+				listaPokemones.add(pokem);
+
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
-		return lista;
+
+		return listaPokemones;
+
 	}
 
 	@Override
