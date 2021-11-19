@@ -17,6 +17,8 @@ import modelo.Pokemon;
 
 public class Main {
 
+	//static Scanner sc = new Scanner(System.in);
+
 	public static void main(String[] args) {
 
 		/*
@@ -152,7 +154,6 @@ public class Main {
 
 		sc.close();
 
-
 	/*	System.out.println();
 		System.out.println("EJERCICIO 11");
 		System.out.println();
@@ -258,7 +259,7 @@ public class Main {
 		} */
 
 	/*	System.out.println();
-		System.out.println("EJERCICIO 17");
+		System.out.println("EJERCICIO 16");
 		System.out.println();
 
 		System.out.println("¿Cuántos alumnos entran en el aula?");
@@ -273,16 +274,13 @@ public class Main {
 
 		for (int i = 0; i < cantidad; i++) {
 
-			if (ej.estaVacio()) {
+			if (ej.estaVacio())
 				ej.add(crear());
-			}
 			else if (ej.estaLLeno()) {
 				System.err.println("\nNo entran más alumnos en el aula");
 				break;
-			}
-			else {
+			} else
 				ej.add(crear());
-			}
 		}
 
 		// Escribir en el fichero
@@ -298,40 +296,24 @@ public class Main {
 /*
 	public static Alumno crear() {
 
-		Scanner sc = new Scanner(System.in);
-
-		Pokemon b = new Pokemon("Bulbasaur", 3, 10, 34, 41, 45, 55, 24);
-		Pokemon s = new Pokemon("Squirtle", 4, 13, 39, 36, 49, 51, 28);
-		Pokemon c = new Pokemon("Charmander", 5, 16, 41, 35, 55, 47, 35);
 		System.out.println("\nVa a introducir los datos del alumno: ");
 
-		PokemonDAOImp uno = new PokemonDAOImp(3);
-		uno.escribirPokemon(f, b.getNombre(), b.getNivel(), b.getVida(), b.getAtaque(), b.getDefensa(),
-				b.getAtaque_especial(), b.getDefensa_especial(), b.getVelocidad());
-		uno.escribirPokemon(f, s.getNombre(), s.getNivel(), s.getVida(), s.getAtaque(), s.getDefensa(),
-				s.getAtaque_especial(), s.getDefensa_especial(), s.getVelocidad());
-		uno.escribirPokemon(f, c.getNombre(), c.getNivel(), c.getVida(), c.getAtaque(), c.getDefensa(),
-				c.getAtaque_especial(), c.getDefensa_especial(), c.getVelocidad());
-		System.out.println("Nombre: ");
+		System.out.print("Nombre: ");
 		String nombre = sc.nextLine();
 
-		//uno.imprimirPokemon(f);
-		System.out.println("Apellidos: ");
+		System.out.print("Apellidos: ");
 		String apellidos = sc.nextLine();
 
-		lista = uno.leerPokemon(f);
-		System.out.println("Año de nacimiento: ");
-		int anio = Integer.parseInt(sc.nextLine());
+		System.out.print("Año de nacimiento: ");
+		int anio = sc.nextInt();
+		sc.nextLine();
 
-		for (Pokemon pokemon : lista) {
-			System.out.println(pokemon);
-		}
-
-		System.out.println("Calle: ");
+		System.out.print("Calle: ");
 		String calle = sc.nextLine();
 
-		System.out.println("Número: ");
-		int numero = Integer.parseInt(sc.nextLine());
+		System.out.print("Número: ");
+		int numero = sc.nextInt();
+		sc.nextLine();
 
 		Alumno alum = new Alumno(nombre, apellidos, anio, calle, numero);
 
