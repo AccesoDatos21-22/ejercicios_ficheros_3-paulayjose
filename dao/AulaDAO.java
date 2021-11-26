@@ -1,74 +1,93 @@
-/**
- *AulaDAO.java
- *@author Laura y Carlos
- *@version 1.0
- */
+package metodos;
 
-package dao;
+import clases.Alumno;
 
-
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
+public class AulaDAO {
 
-import modelo.Alumno;
+    private List<Alumno> alumnos;
+    private int numAlumnos;
 
-/**
- *  @descrition AulaDAO
- *	@author Laura y Carlos
- *  @date 18/9/2021
- *  @version 1.0
- *  @license GPLv3
- */
-public interface  AulaDAO {
-	
-	
-	/**
-	 * Comprueba si el almacén está vacio
-	 * 
-	 * @return true si está vacio
-	 */
-	public boolean estaVacio();
+    public AulaDAO(int tamano) {
+        this.alumnos = new ArrayList<Alumno>(tamano);
+        this.numAlumnos = tamano;
+    }
 
-	/**
-	 * Comprueba si el almacén está lleno
-	 * 
-	 * @return
-	 */
-	public boolean estaLLeno();
+    public void informacionAlumnos() {
+        for (Alumno alumno : alumnos) {
+            System.out.println();
+        }
+    }
 
-	/**
-	 * Anade un nuevo elemento al almacén si hay sitio
-	 * 
-	 * @param valor
-	 *            a anadir al almacén
-	 */
-	public void add(Alumno alumno);
+    public void escribeAlumnos(Path ruta) {
 
-	/**
-	 * Elimina un elemento del almacén si está en el almacen
-	 * 
-	 * @param valor
-	 * @return true si elimina el elemento, false en caso contrario
-	 */
-	public boolean eliminar(Alumno alumno);
+        try (BufferedWriter bw = Files.newBufferedWriter(ruta)){
+            for (Alumno alumno : alumnos) {
+                bw.write(alumno.getNombre()+"\t"+alumno.getApellidos()+"\t"+alumno.getAnoNacimiento()+"\t"+alumno.getDireccion());
+                bw.newLine();
+            }
+        }
+        catch (FileNotFoundException e) {
+            System.err.println(e.getMessage());
+        }
+        catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 
-	/**
-	 * Imprime por pantalla los elementos del almacén
-	 */
-	public void informacionAlumnos() ;
+    public void leeAlumnos(Path ruta) {
 
-	/**
-	 * Método que escribe los alumnos en un archivo
-	 * 
-	 * @param ruta
-	 */
-	public void escribeAlumnos(Path ruta) ;
+        String linea;
 
-	/**
-	 * Método que lee alumnos de un archivo y los muestra por pantalla
-	 * 
-	 * @param ruta
-	 */
-	public void leeAlumnos(Path ruta);
+        try (BufferedReader br = Files.newBufferedReader(ruta)){
+            while ((linea = br.readLine()) != null) {
+                System.out.println(linea);
+            }
+        }
+        catch (FileNotFoundException e) {
+            System.err.println(e.getMessage());
+        }
+        catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 
+    public boolean eliminar(Alumno alumno) {
+        for (Alumno alum : alumnos) {
+            if (alum.getNombre().equals(alumno.getNombre()) && alum.getApellidos().equals(alumno.getApellidos())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void add(Alumno alumno) {
+        this.alumnos.add(alumno);
+    }
+
+    public boolean estaVacio() {
+        if (this.alumnos.isEmpty()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public boolean estaLleno() {
+        if (this.alumnos.size() == numAlumnos) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
