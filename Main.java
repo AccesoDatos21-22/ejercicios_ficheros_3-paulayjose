@@ -1,326 +1,151 @@
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.OpenOption;
+import clases.Alumno;
+import clases.Aula;
+import clases.Pokemon;
+import metodos.AulaDAO;
+import metodos.Ejercicios;
+import metodos.PokemonDAO;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.nio.file.StandardOpenOption;
 import java.util.Scanner;
-
-import dao.AulaDAOImp;
-import dao.PokemonDAOImp;
-import ficheros.Ejercicios1_3;
-import modelo.Alumno;
-import modelo.Pokemon;
 
 public class Main {
 
-	//static Scanner sc = new Scanner(System.in);
-
-	public static void main(String[] args) {
-
-		/*
-		System.out.println("EJERCICIO 1");
-		System.out.println();
-
-		String f = "Pokemones.csv";
-
-		Pokemon b = new Pokemon("Bulbasaur", 3, 10, 34, 41, 45, 55, 24);
-		Pokemon s = new Pokemon("Squirtle", 4, 13, 39, 36, 49, 51, 28);
-		Pokemon c = new Pokemon("Charmander", 5, 16, 41, 35, 55, 47, 35);
-
-		PokemonDAOImp uno = new PokemonDAOImp(3);
-		uno.escribirPokemon(f, b.getNombre(), b.getNivel(), b.getVida(), b.getAtaque(), b.getDefensa(), b.getAtaque_especial(), b.getDefensa_especial(), b.getVelocidad());
-		uno.escribirPokemon(f, s.getNombre(), s.getNivel(), s.getVida(), s.getAtaque(), s.getDefensa(), s.getAtaque_especial(), s.getDefensa_especial(), s.getVelocidad());
-		uno.escribirPokemon(f, c.getNombre(), c.getNivel(), c.getVida(), c.getAtaque(), c.getDefensa(), c.getAtaque_especial(), c.getDefensa_especial(), c.getVelocidad());
-		*/
-
-	/*	System.out.println();
-		System.out.println("EJERCICIO 3");
-		System.out.println();
-
-		Ejercicios1_3 ejer = new Ejercicios1_3();
-
-		try {
-
-			Scanner sc = new Scanner(System.in);
-			Path f = Paths.get("Ejercicio3.txt");
-
-			if (Files.notExists(f)) {
-				Files.createFile(f);
-				System.out.println("Se ha creado el fichero Ejercicio3.txt");
-			}
-
-			ejer.escribefrases(ejer.getFrases(sc), ejer.getNombre(sc));
-			sc.close();
-		}
-		catch (IOException e) {
-			System.err.println(e.getMessage());
-		} */
-
-	/*	System.out.println();
-		System.out.println("EJERCICIO 5");
-		System.out.println();
-
-		Ejercicios1_3 eje = new Ejercicios1_3();
-
-		try {
-			Scanner sc = new Scanner(System.in);
-			Path fi = Paths.get("Ejercicio5.txt");
-
-			if (Files.notExists(fi)) {
-				Files.createFile(fi);
-				System.out.println("Se ha creado el fichero Ejercicio5.txt");
-			}
-
-			eje.escribefrases(eje.getFrases(sc), eje.getNombre(sc));
-
-			//Ejercicio 8
-			System.out.println("\n------------------ Ejercicio 8 ------------------");
-			System.out.println("\nFrases del fichero\n");
-			ejer.leerFrases(f);
-
-			sc.close();
-		}
-		catch (IOException e) {
-			System.err.println(e.getMessage());
-		}*/
-
-		System.out.println();
-		System.out.println("EJERCICIO 7");
-		System.out.println();
-
-		System.out.println("¿Cuál de las cuatro soluciones anteriores piensas que es el más eficiente?");
-		System.out.println();
-		System.out.println("Pienso que la opción más eficiente es el ejercicio 6(Usando BufferedWriter sin crear un arrayList con\n"
-				+ "cada frase, sino con APPEND), debido a que gracias al BufferedWriter no estaremos accediendo constantemente\n"
-				+ "al fichero y al no crear un arrayList consumiremos menos recursos en mi opinión.");
-
-	/*	System.out.println();
-		System.out.println("EJERCICIO 9");
-		System.out.println();
-
-		Scanner sc = new Scanner(System.in);
-		String nombre = null;
-		Ejercicios1_3 ej = null;
-		int cant = 0;
-		float flo = 0.0f;
-
-		try {
-			nombre = "Ejercicio9.txt";
-			ej = new Ejercicios1_3();
-
-			System.out.println("¿Cuántos números en coma flotante desea añadir?");
-			cant = Integer.valueOf(sc.nextLine());
-
-			for (int i=0; i<cant; i++) {
-				System.out.println("Introduzca el "+(i+1)+"º número:");
-				flo = Float.valueOf(sc.nextLine());
-
-				ej.escribirFlotante(flo, nombre);
-			}
-		}
-		catch (Exception e) {
-			System.err.println(e.getMessage());
-		}
-		finally {
-			sc.close();
-		} */
-
-		//Ejercicio 10
-		Scanner sc = new Scanner(System.in);
-
-		Ejercicios1_3 ej = new Ejercicios1_3();
-
-		String ruta = "Ejercicio_10.dat";
-
-		System.out.println("¿Cuántos números desea introducir?");
-		int cant = sc.nextInt();
-		sc.nextLine();
-
-		for (int i = 0; i < cant; i++) {
-
-			System.out.print("introduzca un número: ");
-			float num = sc.nextFloat();
-
-			ej.escribirFlotante(num, ruta);
-
-		}
-
-		System.out.println("\nLos números del fichero son: ");
-		ej.imprimirFlotante(ruta);
-
-		sc.close();
-
-	/*	System.out.println();
-		System.out.println("EJERCICIO 11");
-		System.out.println();
-
-		Ejercicios1_3 ejer = null;
-		String ruta = null;
-		List<Float> lista = null;
-
-		try {
-			ejer = new Ejercicios1_3();
-			ruta = "Ejercicio9.txt";
-			lista = ejer.leerFlotante(ruta);
-			for (int i=0; i<lista.size(); i++) {
-				System.out.println(lista.get(i).toString());
-			}
-		}
-		catch (Exception e) {
-			System.err.println(e.getMessage());
-		} */
-
-	/*	System.out.println();
-		System.out.println("EJERCICIO 13");
-		System.out.println();
-
-		PokemonDAOImp trece = null;
-		String nom = null;
-		Pokemon b = new Pokemon("Bulbasaur", 3, 14, 26, 29, 35, 32, 27);
-		Pokemon s = new Pokemon("Squirtle", 4, 17, 27, 30, 37, 33, 29);
-
-		try {
-			trece = new PokemonDAOImp(2);
-			nom = "Pokemones.txt";
-			trece.escribirPokemon(nom, b);
-			trece.escribirPokemon(nom, s);
-			trece.escribirPokemon(nom, b); //Añadimos otra vez el Pokemon b para ver como salta un error de duplicidad y no lo añade.
-		}
-		catch (Exception e) {
-			System.err.println(e.getMessage());
-		} */
-
-		// Ejercicio 14
-		/*System.out.println("EJERCICIO 14");
-		System.out.println();
-
-		List<Pokemon> lista = new ArrayList<Pokemon>();
-		String f = "Pokemones.csv";
-
-		Pokemon b = new Pokemon("Bulbasaur", 3, 10, 34, 41, 45, 55, 24);
-		Pokemon s = new Pokemon("Squirtle", 4, 13, 39, 36, 49, 51, 28);
-		Pokemon c = new Pokemon("Charmander", 5, 16, 41, 35, 55, 47, 35);
-
-		PokemonDAOImp uno = new PokemonDAOImp(3);
-
-		uno.escribirPokemon(f, b.getNombre(), b.getNivel(), b.getVida(), b.getAtaque(), b.getDefensa(),
-				b.getAtaque_especial(), b.getDefensa_especial(), b.getVelocidad());
-		uno.escribirPokemon(f, s.getNombre(), s.getNivel(), s.getVida(), s.getAtaque(), s.getDefensa(),
-				s.getAtaque_especial(), s.getDefensa_especial(), s.getVelocidad());
-		uno.escribirPokemon(f, c.getNombre(), c.getNivel(), c.getVida(), c.getAtaque(), c.getDefensa(),
-				c.getAtaque_especial(), c.getDefensa_especial(), c.getVelocidad());
-
-		lista = uno.leerPokemon(f);
-
-		for (Pokemon pokemon : lista) {
-			System.out.println(pokemon);
-		}*/
-
-	/*	System.out.println();
-		System.out.println("EJERCICIO 15");
-		System.out.println();
-
-		PokemonDAOImp quince = null;
-		List<Pokemon> lista = new ArrayList<Pokemon>();
-		Path ruta = Paths.get("Pokemones.txt");
-		OpenOption[] options = new OpenOption[2];
-		options[0] = StandardOpenOption.APPEND;
-		options[1] = StandardOpenOption.CREATE;
-		String nom = null;
-		String cad = null;
-
-		try (BufferedWriter bw = Files.newBufferedWriter(ruta, options)){
-
-			bw.write("Charmander;3;14;26;29;35;32;27");
-			bw.newLine();
-			bw.append("Charmeleon;31;34;41;47;51;46;39");
-			bw.newLine();
-			bw.append("Charizard;55;60;73;62;79;58;55");
-			bw.newLine();
-			bw.close();
-
-			nom = "Pokemones.txt";
-			cad = "charm";
-
-			quince = new PokemonDAOImp(3);
-			lista = quince.leerPokemon(nom, cad);
-
-			for (int i=0; i<lista.size(); i++) {
-				System.out.println(lista.get(i).toString());
-				System.out.println();
-			}
-		}
-		catch (Exception e) {
-			System.err.println(e.getMessage());
-		} */
-
-	/*	System.out.println();
-		System.out.println("EJERCICIO 16");
-		System.out.println();
-
-		System.out.println("¿Cuántos alumnos entran en el aula?");
-		System.out.print("Número: ");
-		int tamano = Integer.parseInt(sc.nextLine());
-
-		AulaDAOImp ej = new AulaDAOImp(tamano);
-
-		// Añadir alumnos
-		System.out.println("\n¿Cuántos alumnos quiere añadir?");
-		int cantidad = Integer.parseInt(sc.nextLine());
-
-		for (int i = 0; i < cantidad; i++) {
-
-			if (ej.estaVacio())
-				ej.add(crear());
-			else if (ej.estaLLeno()) {
-				System.err.println("\nNo entran más alumnos en el aula");
-				break;
-			} else
-				ej.add(crear());
-		}
-
-		// Escribir en el fichero
-		Path path = Paths.get("Alumnos_del_aula.txt");
-
-		ej.escribeAlumnos(path);
-
-		//Imprimir alumnos
-		System.out.println("\nDatos de los alumnos: \n");
-		ej.leeAlumnos(path);
-	*/
-	}
-/*
-	public static Alumno crear() {
-
-		System.out.println("\nVa a introducir los datos del alumno: ");
-
-		System.out.print("Nombre: ");
-		String nombre = sc.nextLine();
-
-		System.out.print("Apellidos: ");
-		String apellidos = sc.nextLine();
-
-		System.out.print("Año de nacimiento: ");
-		int anio = sc.nextInt();
-		sc.nextLine();
-
-		System.out.print("Calle: ");
-		String calle = sc.nextLine();
-
-		System.out.print("Número: ");
-		int numero = sc.nextInt();
-		sc.nextLine();
-
-		Alumno alum = new Alumno(nombre, apellidos, anio, calle, numero);
-
-		sc.close();
-
-		return alum;
-	}*/
+    public static void main (String[] args) {
+
+        String ruta = "pokemon.txt";
+        String rutaFlotante = "flotantes.dat";
+        Path rutaAlumnos = Paths.get("alumnos.txt");
+        PokemonDAO DAO = new PokemonDAO();
+        Ejercicios EJE = new Ejercicios();
+        String cadena;
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Ejercicio 1");
+        Pokemon bulbasaur = new Pokemon("Bulbasaur", 318, 45, 49, 49, 65, 65, 45);
+        Pokemon charmander = new Pokemon("Charmander", 309, 39, 52, 43, 60, 50, 65);
+        Pokemon squirtle = new Pokemon("Squirtle", 314, 44, 48, 65, 50, 64, 43);
+
+        DAO.escribirPokemon(ruta, bulbasaur);
+        DAO.escribirPokemon(ruta, charmander);
+        DAO.escribirPokemon(ruta, squirtle);
+        System.out.println("COMPLETADO");
+        System.out.println("----------------------------------");
+        System.out.println();
+
+        System.out.println("Ejercicio 2");
+        DAO.imprimirPokemon(ruta);
+        System.out.println("COMPLETADO");
+        System.out.println("----------------------------------");
+        System.out.println();
+
+        System.out.println("Ejercicio 3, 4, 5, 6");
+  //      EJE.escribeFrases(EJE.getNombre(sc), EJE.getFrases(sc));
+        System.out.println("COMPLETADO");
+        System.out.println("----------------------------------");
+        System.out.println();
+
+        System.out.println("Ejercicio 8");
+  //      EJE.leerFrases(EJE.getNombre(sc));
+        System.out.println("COMPLETADO");
+        System.out.println("----------------------------------");
+        System.out.println();
+
+        System.out.println("Ejercicio 9");
+   /*     System.out.println("¿Cuántos números flotantes desea escribir?");
+        int cant = Integer.parseInt(sc.nextLine());
+        float num;
+        for (int i=0; i<cant; i++) {
+            System.out.println("Escriba el "+(i+1)+"º número flotante:");
+            num = Float.parseFloat(sc.nextLine());
+            EJE.escribirFlotante(num, rutaFlotante);
+        }*/
+        System.out.println("COMPLETADO");
+        System.out.println("----------------------------------");
+        System.out.println();
+
+        System.out.println("Ejercicio 10");
+    //    EJE.imprimirFlotante(rutaFlotante);
+        System.out.println("COMPLETADO");
+        System.out.println("----------------------------------");
+        System.out.println();
+
+        System.out.println("Ejercicio 11");
+   /*     for (int i=0; i<EJE.leerFlotante(rutaFlotante).size(); i++) {
+            System.out.println(EJE.leerFlotante(rutaFlotante).get(i));
+        }*/
+        System.out.println("COMPLETADO");
+        System.out.println("----------------------------------");
+        System.out.println();
+
+        System.out.println("Ejercicio 12");
+        System.out.println("Crear un JavaBean en la clase Pokemon y sobreescribir el método toString().");
+        System.out.println("COMPLETADO");
+        System.out.println("----------------------------------");
+        System.out.println();
+
+        System.out.println("Ejercicio 13");
+        Pokemon squirtle1 = new Pokemon("Squirtle", 314, 44, 48, 65, 50, 64, 43);
+        Pokemon charizard = new Pokemon("Charizard", 534, 78, 84, 78, 109, 85, 100);
+        DAO.escribirPokemon(ruta, squirtle1);
+        DAO.escribirPokemon(ruta, charizard);
+        System.out.println("COMPLETADO");
+        System.out.println("----------------------------------");
+        System.out.println();
+
+        System.out.println("Ejercicio 14");
+   /*     for (int i=0; i<DAO.leerPokemon(ruta).size(); i++) {
+            System.out.println(DAO.leerPokemon(ruta).get(i));
+            System.out.println();
+        }*/
+        System.out.println("COMPLETADO");
+        System.out.println("----------------------------------");
+        System.out.println();
+
+        System.out.println("Ejercicio 15");
+        System.out.println("Introduzca la cadena que desea usar de filtro: ");
+        cadena = sc.nextLine();
+        for (int i=0; i<DAO.leerPokemon(ruta,cadena).size(); i++) {
+            System.out.println(DAO.leerPokemon(ruta, cadena).get(i));
+            System.out.println();
+        }
+        System.out.println("COMPLETADO");
+        System.out.println("----------------------------------");
+        System.out.println();
+
+        System.out.println("Ejercicio 16");
+        AulaDAO AULA = new AulaDAO(5);
+        System.out.println("¿Cuántos alumnos desea introducir?");
+        int cant = Integer.parseInt(sc.nextLine());
+        while (cant<0 || cant>5) {
+            System.out.println("Lo sentimos, el aula solo dispone de 5 plazas. Introduzca un valor entre 0 y 5.");
+            System.out.println("¿Cuántos alumnos desea introducir?");
+            cant = Integer.parseInt(sc.nextLine());
+        }
+        for (int i=0; i<cant; i++) {
+            System.out.println("Introduzca el nombre del alumno:");
+            String nombre = sc.nextLine();
+            System.out.println("Introduzca el apellido del alumno:");
+            String apellido = sc.nextLine();
+            System.out.println("Introduzca el año de nacimiento del alumno:");
+            int ano = Integer.parseInt(sc.nextLine());
+            System.out.println("Introduzca la calle donde vive el alumno:");
+            String calle = sc.nextLine();
+            System.out.println("Introduzca el número de vivienda del alumno:");
+            int numero = Integer.parseInt(sc.nextLine());
+            Alumno alumno = new Alumno(nombre, apellido, ano, calle, numero);
+            AULA.add(alumno);
+        }
+        AULA.escribeAlumnos(rutaAlumnos);
+        AULA.leeAlumnos(rutaAlumnos);
+        AULA.informacionAlumnos();
+        System.out.println("COMPLETADO");
+        System.out.println("----------------------------------");
+        System.out.println();
+
+        sc.close();
+    }
 }
-
 
