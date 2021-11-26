@@ -42,114 +42,119 @@ public class PokemonDAOImp implements AulaDAO {
 
 	public void escribirPokemon(String ruta, Pokemon pokemon) {
 
-		Path fichero = Paths.get(ruta);
-		OpenOption[] options = new OpenOption[2];
-		options[0] = StandardOpenOption.APPEND;
-		options[1] = StandardOpenOption.CREATE;
-		BufferedReader br = null;
-		String linea = null;
-		String [] poke = null;
-		boolean sino = false;
-		String datos = null;
+        // Método para escribir pokemons
+    /*  Path fichero = Paths.get(ruta);
+        OpenOption[] options = new OpenOption[2];
+        options[0] = StandardOpenOption.APPEND;
+        options[1] = StandardOpenOption.CREATE;
+        String datos;
 
-		try (BufferedWriter bw = Files.newBufferedWriter(fichero, options)){
+        try (BufferedWriter bw = Files.newBufferedWriter(fichero, options)){
 
-			br = Files.newBufferedReader(fichero);
-			datos = pokemon.getNombre()+";"+pokemon.getNivel()+";"+pokemon.getVida()+";"+pokemon.getAtaque()+";"+pokemon.getDefensa()+";"+pokemon.getAtaque_especial()+";"+pokemon.getDefensa_especial()+";"+pokemon.getVelocidad();
+            if (Files.notExists(fichero)) {
+                Files.createFile(fichero);
+            }
+            datos = pokemon.getNombre()+";"+pokemon.getNivel()+";"+pokemon.getVida()+";"+pokemon.getAtaque()+";"+pokemon.getDefensa()+";"+pokemon.getAtaqueEspecial()+";"+pokemon.getDefensaEspecial()+";"+pokemon.getVelocidad()+"\n";
+            bw.write(datos);
+        }
+        catch (IOException e) {
+            System.err.println(e.getMessage());
+        }*/
+        // Método para escribir objetos sin que se repitan
+        Path fichero = Paths.get(ruta);
+        OpenOption[] options = new OpenOption[2];
+        options[0] = StandardOpenOption.APPEND;
+        options[1] = StandardOpenOption.CREATE;
+        BufferedReader br;
+        String linea;
+        String[] poke;
+        boolean coincide = false;
 
-			if ((linea = br.readLine()) == null) {
-				bw.write(datos);
-				bw.newLine();
-				System.out.println("El Pokemon "+pokemon.getNombre()+" ha sido añadido.");
-			}
-			else {
-				while (linea != null) {
+        try (BufferedWriter bw = Files.newBufferedWriter(fichero, options)) {
 
-					poke = linea.split(";");
-					if (!(pokemon.getNombre().equalsIgnoreCase(poke[0].toString()))) {
-						sino = true;
-					}
-					else {
-						System.err.println("El Pokemon "+pokemon.getNombre()+" ya existe.");
-						sino = false;
-						break;
-					}
-					linea = br.readLine();
-				}
-			}
-			if (sino) {
-				bw.append(datos);
-				bw.newLine();
-				System.out.println("El Pokemon "+pokemon.getNombre()+" ha sido añadido.");
-			}
-		}
-		catch (IOException e) {
-			System.err.println(e.getMessage());
-			System.err.println("Error IOException");
-		}
-		catch (Exception e) {
-			System.err.println(e.getMessage());
-		}
-	}
+            br = Files.newBufferedReader(fichero);
 
-	public void imprimirPokemon(String ruta) {
-		Path archivo = Paths.get(ruta);
-		String linea;
+            if (br.readLine() == null) {
+                bw.write(pokemon.getNombre()+";"+pokemon.getNivel()+";"+pokemon.getVida()+";"+pokemon.getAtaque()+";"+pokemon.getDefensa()+";"+pokemon.getAtaqueEspecial()+";"+pokemon.getDefensaEspecial()+";"+pokemon.getVelocidad());
+                bw.newLine();
+            }
+            else {
+                while ((linea = br.readLine()) != null) {
+                    poke = linea.split(";");
+                    if (poke[0].equals(pokemon.getNombre())){
+                        coincide = true;
+                        break;
+                    }
+                }
+                if (!(coincide)) {
+                    bw.append(pokemon.getNombre() + ";" + pokemon.getNivel() + ";" + pokemon.getVida() + ";" + pokemon.getAtaque() + ";" + pokemon.getDefensa() + ";" + pokemon.getAtaqueEspecial() + ";" + pokemon.getDefensaEspecial() + ";" + pokemon.getVelocidad());
+                    bw.newLine();
+                }
+                else {
+                    System.out.println("ERROR. El pokemon "+pokemon.getNombre()+" ya existe.");
+                }
+            }
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 
-		try (BufferedReader br = Files.newBufferedReader(archivo)) {
+    public void imprimirPokemon(String ruta) {
 
-			while ((linea = br.readLine()) != null) {
+        Path fichero = Paths.get(ruta);
+        String linea;
+        String[] pokemones;
 
-				String pokemones[] = linea.split(";");
+        try (BufferedReader br = Files.newBufferedReader(fichero)){
+            while ((linea = br.readLine()) != null) {
+                pokemones = linea.split(";");
+                System.out.println("Name: <"+pokemones[0]+">\n \tLevel: <"+pokemones[1]+">\n \tHP: <"+pokemones[2]+">\n \tAttack: <"+pokemones[3]+">\n \tDefense: <"+pokemones[4]+">\n \tSpecial Attack: <"+pokemones[5]+">\n \tSpecial Defense: <"+pokemones[6]+">\n \tSpeed: <"+pokemones[7]+">");
+            }
+        }
+        catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 
-				System.out.println("\nName: <" + pokemones[0] + ">\n\tLevel: <" + pokemones[1] + ">\n\tHP: <"
-						+ pokemones[2] + ">\n\tAttack: <" + pokemones[3] + ">\n\tDefense: <" + pokemones[4]
-						+ ">\n\tSppecial attack: <" + pokemones[5] + ">\n\tSpecial defense: <" + pokemones[6]
-						+ ">\n\tSpeed: <" + pokemones[7] + ">");
+    public List<Pokemon> leerPokemon(String ruta, String cadena) {
 
-			}
+   /*     // Método para leer datos de un Fichero y guardarlos en un List<>
+        Path fichero = Paths.get(ruta);
+        String linea;
+        String[] pokemones;
+        List<Pokemon> lista = new ArrayList<>();
 
-		} catch (FileNotFoundException e) {
-			System.err.println("El fichero no ha sido encontrado");
-		} catch (IOException e) {
-			System.err.println(e.getMessage());
-		}
-	}
+        try (BufferedReader br = Files.newBufferedReader(fichero)){
+            while ((linea = br.readLine()) != null) {
+                pokemones = linea.split(";");
+                Pokemon pokemon = new Pokemon(pokemones[0], Integer.parseInt(pokemones[1]), Integer.parseInt(pokemones[2]), Integer.parseInt(pokemones[3]), Integer.parseInt(pokemones[4]), Integer.parseInt(pokemones[5]), Integer.parseInt(pokemones[6]), Integer.parseInt(pokemones[7]));
+                lista.add(pokemon);
+            }
+        }
+        catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return lista;
+    }*/
+        Path fichero = Paths.get(ruta);
+        String linea;
+        String[] pokemones;
+        List<Pokemon> lista = new ArrayList<>();
 
-	public List<Pokemon> leerPokemon(String ruta) {
-
-		List<Pokemon> listaPokemones = new ArrayList<Pokemon>();
-		Path path = Paths.get(ruta);
-		String linea;
-
-		try(BufferedReader br = Files.newBufferedReader(path)) {
-
-			while ((linea = br.readLine()) != null) {
-
-				String[] pok = linea.split(";");
-
-				Pokemon pokem = new Pokemon();
-
-				pokem.setNombre(pok[0]);
-				pokem.setNivel(Integer.parseInt(pok[1]));
-				pokem.setVida(Integer.parseInt(pok[2]));
-				pokem.setAtaque(Integer.parseInt(pok[3]));
-				pokem.setDefensa(Integer.parseInt(pok[4]));
-				pokem.setAtaque_especial(Integer.parseInt(pok[5]));
-				pokem.setDefensa_especial(Integer.parseInt(pok[6]));
-				pokem.setVelocidad(Integer.parseInt(pok[7]));
-
-				listaPokemones.add(pokem);
-
-			}
-
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-
-		return listaPokemones;
-
-	}
+        try (BufferedReader br = Files.newBufferedReader(fichero)){
+            while ((linea = br.readLine()) != null) {
+                pokemones = linea.split(";");
+                if (pokemones[0].contains(cadena)) {
+                    Pokemon pokemon = new Pokemon(pokemones[0], Integer.parseInt(pokemones[1]), Integer.parseInt(pokemones[2]), Integer.parseInt(pokemones[3]), Integer.parseInt(pokemones[4]), Integer.parseInt(pokemones[5]), Integer.parseInt(pokemones[6]), Integer.parseInt(pokemones[7]));
+                    lista.add(pokemon);
+                }
+            }
+        }
+        catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return lista;
+    }
 
 	@Override
 	public boolean estaVacio() {
